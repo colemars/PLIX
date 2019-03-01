@@ -9,26 +9,22 @@ const styles = {
   title: {
     textAlign: 'center',
     color: 'white',
-    fontSize: '8vw',
+    fontSize: '9vw',
     fontFamily: 'Rubik'
   },
 };
 
-function Body(){
+function Title(){
   return (
-    <div style = {styles.root}>
-      <Grid container spacing = {0}>
-        <Grid item lg = {12}>
+
           <div style = {styles.title}>PLIX.DEV</div>
-        </Grid>
-      </Grid>
-    </div>
+
   );
 }
 
-Body.propTypes = {
+Title.propTypes = {
 
 };
 
 
-export default Body;
+export default Title;
