@@ -6,50 +6,35 @@ import Settings from 'mdi-material-ui/Settings'
 import ChartBar from 'mdi-material-ui/ChartBar'
 
 const styles = {
-  volume: {
+  menuIcon: {
+    paddingLeft: '2%',
+    paddingRight: '2%',
     color: 'white',
-    right: '1%',
-    position: 'fixed',
-    width: '3%',
+    width: '3vw',
     height: 'auto',
-    marginTop: '1%'
-  },
-  settings: {
-    color: 'white',
-    right: '5%',
-    position: 'fixed',
-    width: '3%',
-    height: 'auto',
-    marginTop: '1%'
-  },
-  chart: {
-    color: 'white',
-    right: '9%',
-    position: 'fixed',
-    width: '3%',
-    height: 'auto',
-    marginTop: '1%'
+    float: 'right'
   },
   userName: {
     color: 'white',
-    fontSize: '3vw',
-    marginTop: '1%',
+    fontSize: '2vw',
     marginLeft: '1%',
     fontFamily: 'Rubik'
   },
-  bar: {
-    marginTop: '1%',
+  headerBox: {
+    paddingTop: '1%'
   }
 }
 
 function Header(){
   return (
-    <Grid container spacing = {0}>
-      <Grid item lg = {12}>
-        <span style = {styles.userName}> colemars </span>
-        <VolumeHigh style = {styles.volume} />
-        <Settings style = {styles.settings}/>
-        <ChartBar style = {styles.chart} />
+    <Grid style={styles.headerBox} container spacing = {0}>
+      <Grid item xs = {10}>
+        <span style = {styles.userName}> domedisorder  </span>
+        </Grid>
+        <Grid item xs = {2}>
+        <VolumeHigh style = {styles.menuIcon} />
+        <Settings style = {styles.menuIcon}/>
+        <ChartBar style = {styles.menuIcon} />
       </Grid>
     </Grid>
   );
