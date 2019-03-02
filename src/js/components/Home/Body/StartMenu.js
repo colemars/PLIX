@@ -1,6 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+import MenuButton from './MenuButton'
+import {v4} from 'uuid'
 
 const styles = {
   root: {
@@ -8,9 +10,11 @@ const styles = {
   },
   menu: {
     backgroundColor: 'white',
-    height: '30vh',
+    height: '35vh',
     width: '20vw',
-    borderRadius: '5px',
+    borderRadius: '2px',
+    borderBottom: '5px solid #B4CCB7',
+    padding: '3px'
   },
   test: {
     boxSizing: 'border-box',
@@ -23,7 +27,6 @@ const styles = {
     width: '100%',
     height: '100%',
     padding: '5px',
-    border: '1px solid blue',
   }
 };
 
