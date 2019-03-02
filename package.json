@@ -11,6 +11,7 @@
     "react-helmet": "^5.2.0",
     "react-scripts": "2.1.5",
     "redux": "^4.0.1",
+    "uuid": "^3.3.2",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
