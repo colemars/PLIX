@@ -35,12 +35,10 @@ function StartMenu(){
 
     <Grid style={styles.menu} container justify='center' spacing = {0}>
 
-      {[0,1,2,3,4].map(value => (
-        <Grid key={value} item xs = {12}>
+      {['Play','Saved Games','Account','How To Play','Customize'].map(value => (
+        <Grid key={v4()} item xs = {12}>
           <div style={styles.menuItem}>
-            <div style={styles.test}>
-            Hello
-            </div>
+            <MenuButton selection={value}/>
           </div>
         </Grid>
       ))}
