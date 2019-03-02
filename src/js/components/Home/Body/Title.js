@@ -7,6 +7,8 @@ const styles = {
 
   },
   title: {
+    zIndex:9,
+    position: 'relative',
     textAlign: 'center',
     color: 'white',
     fontSize: '9vw',

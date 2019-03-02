@@ -7,6 +7,8 @@ import ChartBar from 'mdi-material-ui/ChartBar'
 
 const styles = {
   menuIcon: {
+    zIndex:2,
+    position: 'relative',
     paddingLeft: '2%',
     paddingRight: '2%',
     color: 'white',
@@ -15,12 +17,16 @@ const styles = {
     float: 'right'
   },
   userName: {
+    zIndex:2,
+    position: 'relative',
     color: 'white',
     fontSize: '2vw',
     marginLeft: '1%',
     fontFamily: 'Rubik'
   },
   headerBox: {
+    zIndex:2,
+    position: 'relative',
     paddingTop: '1%'
   }
 }

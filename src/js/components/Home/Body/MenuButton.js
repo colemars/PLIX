@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 const styles = {
   button: {
+    zIndex:9,
+    position: 'relative',
     boxSizing: 'border-box',
     width: '100%',
     height: '100%',
@@ -11,6 +13,8 @@ const styles = {
     textAlign: 'center',
   },
   text:{
+    zIndex:9,
+    position: 'relative',
     color: 'white',
     fontSize: '1.5vw',
     fontFamily: 'Rubik',

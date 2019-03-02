@@ -9,6 +9,8 @@ const styles = {
 
   },
   menu: {
+    zIndex:9,
+    position: 'relative',
     backgroundColor: 'white',
     height: '35vh',
     width: '20vw',
@@ -17,12 +19,16 @@ const styles = {
     padding: '3px'
   },
   test: {
+    zIndex:9,
+    position: 'relative',
     boxSizing: 'border-box',
     width: '100%',
     height: '100%',
     border: '1px solid red',
   },
   menuItem: {
+    zIndex:9,
+    position: 'relative',
     boxSizing: 'border-box',
     width: '100%',
     height: '100%',

@@ -10,12 +10,16 @@ const styles = {
 
   },
   title: {
+    zIndex:9,
+    position: 'relative',
     textAlign: 'center',
     color: 'white',
     fontSize: '8vw',
     fontFamily: 'Rubik'
   },
   menu: {
+    zIndex:9,
+    position: 'relative',
     marginLeft: '20px',
     marginRight: '20px'
   }
@@ -28,12 +32,12 @@ function Body(){
     <Grid item xs={12}>
       <Grid container justify='center' spacing = {0}>
 
-            <Grid style={styles.menu} key={0} item>
-              <StartMenu />
-            </Grid>
-            <Grid style={styles.menu} key={1} item>
-              <SelectedMenu />
-            </Grid>
+        <Grid style={styles.menu} key={0} item>
+          <StartMenu />
+        </Grid>
+        <Grid style={styles.menu} key={1} item>
+          <SelectedMenu />
+        </Grid>
 
       </Grid>
     </Grid>
