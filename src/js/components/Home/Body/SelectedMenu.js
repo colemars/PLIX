@@ -11,9 +11,7 @@ const styles = {
     backgroundColor: 'white',
     height: '35vh',
     width: '20vw',
-    borderRadius: '2px',
-    borderBottom: '5px solid #B4CCB7',
-    padding: '3px'
+    padding: '3px',
   },
   test: {
     zIndex:9,
@@ -35,13 +33,13 @@ const styles = {
   }
 };
 
-function SelectedMenu(){
-  return (
+function SelectedMenu(props){
 
+  return (
     <Grid style={styles.menu} container justify='center' spacing = {0}>
         <Grid key={v4()} item xs = {12}>
           <div style={styles.menuItem}>
-            How to Play
+            {props.selection}
           </div>
         </Grid>
     </Grid>
@@ -50,7 +48,7 @@ function SelectedMenu(){
 }
 
 SelectedMenu.propTypes = {
-
+  selection: PropTypes.string.isRequired
 };
 
 
