@@ -57,7 +57,7 @@ class StartMenu extends React.Component {
         {['Play','Saved Games','Account','How To Play','Customize'].map(value => (
           <Grid key={v4()} item xs = {12}>
             <div style={styles.menuItem}>
-              <MenuButton selection={value} onMenuButtonClick={this.props.onMenuButtonClick} />
+              <MenuButton selection={value} onMenuButtonClick={this.props.onMenuButtonClick} key={v4()} id={value} />
             </div>
           </Grid>
         ))}
