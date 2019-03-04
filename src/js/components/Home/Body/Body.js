@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import Title from './Title';
 import StartMenu from './StartMenu';
 import SelectedMenu from './SelectedMenu';
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return { buttonProps: state.buttonProps };
+};
 
 const styles = {
   root: {
@@ -29,19 +34,19 @@ class Body extends React.Component {
   constructor(props){
     super(props)
     this.props = props;
+    console.log('swag', this.props);
     this.state = {
-      menuButtonSelected: false,
       selection: null
     }
     this.handleMenuButtonClick = this.handleMenuButtonClick.bind(this)
   }
 
   handleMenuButtonClick(selection){
-    this.setState({menuButtonSelected: true, selection: selection})
+    this.setState({selection: selection})
   }
 
   render(){
-    let selectedMenu = this.state.menuButtonSelected ? <SelectedMenu selection={this.state.selection} /> : null
+    let selectedMenu = this.props.buttonProps.selected ? <SelectedMenu selection={this.state.selection} /> : null
     return (
       <div>
         <Title />
@@ -64,5 +69,6 @@ Body.propTypes = {
 
 };
 
+const Page = connect(mapStateToProps)(Body);
 
-export default Body;
+export default Page;
