@@ -11,12 +11,10 @@ const styles = {
   menu: {
     zIndex:9,
     position: 'relative',
-    backgroundColor: 'white',
     height: '35vh',
     width: '20vw',
-    borderRadius: '2px',
-    borderBottom: '5px solid #B4CCB7',
-    padding: '3px'
+    padding: '3px',
+    cursor: 'pointer'
   },
   test: {
     zIndex:9,
@@ -36,25 +34,40 @@ const styles = {
   }
 };
 
-function StartMenu(){
-  return (
+class StartMenu extends React.Component {
+  constructor(props){
+    super(props)
+    this.props = props;
+    this.state = {
+      menuButtonSelected: false
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-    <Grid style={styles.menu} container justify='center' spacing = {0}>
+  handleClick(){
+    console.log('click');
+    this.props.onMenuButtonClick()
 
-      {['Play','Saved Games','Account','How To Play','Customize'].map(value => (
-        <Grid key={v4()} item xs = {12}>
-          <div style={styles.menuItem}>
-            <MenuButton selection={value}/>
-          </div>
-        </Grid>
-      ))}
-    </Grid>
+  }
 
-  );
+  render(){
+    console.log(this.props);
+    return (
+      <Grid style={styles.menu} container justify='center' spacing = {0}>
+        {['Play','Saved Games','Account','How To Play','Customize'].map(value => (
+          <Grid key={v4()} item xs = {12}>
+            <div style={styles.menuItem}>
+              <MenuButton selection={value} onMenuButtonClick={this.props.onMenuButtonClick} />
+            </div>
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
 }
 
 StartMenu.propTypes = {
-
+  onMenuButtonClick: PropTypes.func.isRequired,
 };
 
 
