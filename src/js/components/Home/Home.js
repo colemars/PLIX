@@ -1,9 +1,14 @@
 import React from 'react';
 import Body from './Body/Body';
 import Header from './Header/Header';
-import Canvas from './Canvas/Canvas';
-import P5Wrapper from 'react-p5-wrapper';
-import Sketch from "../../sketches/Test";
+import { Sprite, Stage } from "react-pixi-fiber";
+import RotatingBunny from "../../sketches/RotatingBunny"
+
+const height = 450;
+const width = 600;
+const OPTIONS = {
+  backgroundColor: 0x3D9CA8
+};
 
 const styles = {
   gamecontainer: {
@@ -24,12 +29,12 @@ const styles = {
   }
 }
 class Menu extends React.Component {
-
-
   render() {
     return (
       <div>
-        <P5Wrapper sketch={Sketch} />
+        <Stage style = {styles.canvas} options={OPTIONS} width={window.innerWidth} height={window.innerHeight}>
+       <RotatingBunny x={window.innerWidth / 2} y={window.innerHeight / 2} />
+      </Stage>
         <div style={styles.gamestartscreen}>
           <Header />
           <Body />
