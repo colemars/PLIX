@@ -1,8 +1,9 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
-import MenuButton from './MenuButton'
 import {v4} from 'uuid'
+import MenuButton from './MenuButton'
+import HowToPlay from './SelectedMenu/HowToPlay'
 
 const styles = {
   menu: {
@@ -34,22 +35,21 @@ const styles = {
 };
 
 function SelectedMenu(props){
-
+  console.log('props', props);
   return (
     <Grid style={styles.menu} container justify='center' spacing = {0}>
         <Grid key={v4()} item xs = {12}>
           <div style={styles.menuItem}>
             {props.selection}
+            <HowToPlay />
           </div>
         </Grid>
     </Grid>
-
   );
 }
 
 SelectedMenu.propTypes = {
   selection: PropTypes.string.isRequired
 };
-
 
 export default SelectedMenu;
