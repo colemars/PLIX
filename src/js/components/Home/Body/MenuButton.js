@@ -1,6 +1,19 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { connect } from "react-redux";
+import v4 from "uuid";
 import PropTypes from 'prop-types';
+import { selectMenu } from "../../../actions/index";
+
+function mapDispatchToProps(dispatch) {
+  return {
+    selectMenu: select => dispatch(selectMenu(select))
+  };
+}
+
+const mapStateToProps = state => {
+  return { buttonProps: state.buttonProps};
+};
 
 const styles = {
   button: {
@@ -31,47 +44,75 @@ const styles = {
   }
 };
 
+const buttonSelected = {
+  boxShadow: '0 15px 10px -10px rgba(31, 31, 31, 0.5)',
+  border: '1px solid #fff',
+  backgroundColor: '#fff',
+}
+
+const buttonHovered = {
+  boxShadow: '0 15px 10px -10px rgba(31, 31, 31, 0.5)',
+  border: '1px solid #fff',
+  backgroundColor: '#fff'
+}
+
+const buttonNormal = {
+  boxShadow: '0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset', border: '1px solid #ccc',
+  backgroundColor: '#fff',
+  border: '1px solid #ccc'
+}
+
 class MenuButton extends React.Component{
   constructor(props) {
     super(props);
     this.props = props;
     this.state = {
       hovered: false,
-      clicked: false,
-      width: '100%',
-      height: '100%',
-      backgroundColor: '#fff',
-      color: '#000',
-      borderWidth: 0,
-      borderRadius: 5,
-      boxShadow: '0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset',
-      border: '1px solid #ccc'
     }
-    this.handleMouseHover = this.handleMouseHover.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleClick = this.handleClick.bind(this);
 
   }
 
-  handleMouseHover(e){
-    this.setState({hovered: !this.state.hovered})
-      if (!this.state.hovered) {
-      this.setState({boxShadow: '0 15px 10px -10px rgba(31, 31, 31, 0.5)', border: '1px solid #fff'})
-      } else {
-      this.setState({boxShadow: '0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset', border: '1px solid #ccc'})
-    }
+  handleMouseEnter(e){
+    this.setState({hovered: true});
+  }
+
+  handleMouseLeave(e){
+    this.setState({hovered: false});
   }
 
   handleClick(e){
+    console.log('id', this.props.id);
+    this.props.selectMenu(this.props.id);
     this.props.onMenuButtonClick(this.props.selection)
   }
 
+  componentWillUnmount(){
+    console.log('unmount');
+  }
+
   render(){
+    let hoverStyle;
+    if (this.props.buttonProps.selectedId === this.props.id){
+      hoverStyle = buttonSelected
+    } else {
+       hoverStyle = this.state.hovered ? buttonHovered : buttonNormal
+    }
+
+    styles.button.backgroundColor = hoverStyle.backgroundColor
+    styles.button.boxShadow = hoverStyle.boxShadow
+    styles.button.border = hoverStyle.border
+
+    console.log(this.state.backgroundColor);
+
     return (
       <div
         onClick={this.handleClick}
-        onMouseEnter={this.handleMouseHover}
-        onMouseLeave={this.handleMouseHover}
-        style={{...styles.button, boxShadow: this.state.boxShadow, border: this.state.border}}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        style={{...styles.button}}
         >
         <div style={styles.text}>
           {this.props.selection}
@@ -83,8 +124,10 @@ class MenuButton extends React.Component{
 
 MenuButton.propTypes = {
   selection: PropTypes.string.isRequired,
-  onMenuButtonClick: PropTypes.func.isRequired
+  onMenuButtonClick: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired
 };
 
+const Button = connect(mapStateToProps, mapDispatchToProps)(MenuButton);
 
-export default MenuButton;
+export default Button;
