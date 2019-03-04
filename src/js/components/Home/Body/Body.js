@@ -25,24 +25,39 @@ const styles = {
   }
 };
 
-function Body(){
-  return (
-    <div>
-    <Title />
-    <Grid item xs={12}>
-      <Grid container justify='center' spacing = {0}>
+class Body extends React.Component {
+  constructor(props){
+    super(props)
+    this.props = props;
+    this.state = {
+      menuButtonSelected: false,
+      selection: null
+    }
+    this.handleMenuButtonClick = this.handleMenuButtonClick.bind(this)
+  }
 
-        <Grid style={styles.menu} key={0} item>
-          <StartMenu />
-        </Grid>
-        <Grid style={styles.menu} key={1} item>
-          <SelectedMenu />
-        </Grid>
+  handleMenuButtonClick(selection){
+    this.setState({menuButtonSelected: true, selection: selection})
+  }
 
-      </Grid>
-    </Grid>
-    </div>
-  );
+  render(){
+    let selectedMenu = this.state.menuButtonSelected ? <SelectedMenu selection={this.state.selection} /> : null
+    return (
+      <div>
+        <Title />
+        <Grid item xs={12}>
+          <Grid container justify='center' spacing = {0}>
+            <Grid style={styles.menu} key={0} item>
+              <StartMenu onMenuButtonClick={this.handleMenuButtonClick} />
+            </Grid>
+            <Grid style={styles.menu} key={1} item>
+              {selectedMenu}
+            </Grid>
+          </Grid>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 Body.propTypes = {
