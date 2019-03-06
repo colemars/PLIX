@@ -3,11 +3,12 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from "react-redux";
 import v4 from "uuid";
 import PropTypes from 'prop-types';
-import { selectMenu } from "../../../actions/index";
+import { selectMenu, playGame } from "../../../actions/index";
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectMenu: select => dispatch(selectMenu(select))
+    selectMenu: select => dispatch(selectMenu(select)),
+    playGame: play => dispatch(playGame(play))
   };
 }
 
