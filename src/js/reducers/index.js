@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, SELECT_MENU } from "../constants/action-types";
+import { ADD_ARTICLE, SELECT_MENU, TOGGLE_UI, PLAY_GAME } from "../constants/action-types";
 
 const initialState = {
   articles: [],
