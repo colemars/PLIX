@@ -6,7 +6,9 @@ const initialState = {
     selected: false,
     selectedId: null,
     backgroundColor: '#fff'
-  }
+  },
+  showUi: false,
+  playGame: false
 };
 
 function rootReducer(state = initialState, action) {
