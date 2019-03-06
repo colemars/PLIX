@@ -2,7 +2,11 @@ import React from 'react';
 import Body from './Body/Body';
 import Header from './Header/Header';
 import { Sprite, Stage } from "react-pixi-fiber";
-import RotatingBunny from "../../sketches/RotatingBunny"
+import RotatingBunny from "../../sketches/RotatingBunny";
+import UI from '../UI/UI';
+import Game from '../Game/Game';
+import { connect } from "react-redux";
+
 
 const height = 450;
 const width = 600;
