@@ -85,7 +85,9 @@ class MenuButton extends React.Component{
   }
 
   handleClick(e){
-    console.log('id', this.props.id);
+    if (this.props.selection === 'Play') {
+      this.props.playGame();
+    }
     this.props.selectMenu(this.props.id);
     this.props.onMenuButtonClick(this.props.selection)
   }
