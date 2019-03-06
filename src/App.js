@@ -12,12 +12,7 @@ class App extends Component {
           <style>{`body { margin: 0; width:100%; height:100%;}`}</style>
           <style>{`html { height:100%; background-color: #3D9CA8}`}</style>
         </Helmet>
-        <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route component={Home} />
-        </Switch>
-        </BrowserRouter>
+          <Home />
       </div>
     );
   }
