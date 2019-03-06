@@ -10,3 +10,11 @@ export function addArticle(payload) {
 export function selectMenu(payload) {
   return { type: SELECT_MENU, payload }
 };
+
+export function toggleUi(payload) {
+  return { type: TOGGLE_UI, payload }
+};
+
+export function playGame(payload) {
+  return { type: PLAY_GAME, payload }
+};
