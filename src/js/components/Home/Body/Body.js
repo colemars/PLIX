@@ -34,7 +34,6 @@ class Body extends React.Component {
   constructor(props){
     super(props)
     this.props = props;
-    console.log('swag', this.props);
     this.state = {
       selection: null
     }
