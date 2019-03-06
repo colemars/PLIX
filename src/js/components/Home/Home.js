@@ -29,19 +29,34 @@ const styles = {
   }
 }
 class Menu extends React.Component {
+  constructor(props){
+    super(props)
+    console.log(this.props, 'here');
+  }
   render() {
+    console.log(this.props.playGame);
+    let ui = this.props.playGame ? <UI /> : null
+    let game = this.props.playGame ? <Game /> : null
+    let header = !this.props.playGame ? <Header /> : null
+    let body = !this.props.playGame ? <Body /> : null
     return (
       <div>
-        <Stage style = {styles.canvas} options={OPTIONS} width={window.innerWidth} height={window.innerHeight}>
-       <RotatingBunny x={window.innerWidth / 2} y={window.innerHeight / 2} />
-      </Stage>
+        {ui}
+        {game}
         <div style={styles.gamestartscreen}>
-          <Header />
-          <Body />
+          {header}
+          {body}
         </div>
       </div>
     );
   }
 }
 
-export default Menu;
+const mapStateToProps = state => {
+  return {
+    buttonProps: state.buttonProps,
+    playGame: state.playGame
+  }
+};
+
+export default connect(mapStateToProps)(Menu);
