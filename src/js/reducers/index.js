@@ -22,6 +22,14 @@ function rootReducer(state = initialState, action) {
       return ({...state, buttonProps:newProps
       });
     }
+  if (action.type === TOGGLE_UI) {
+      return ({...state, showUi:!state.showUi
+      });
+    }
+  if (action.type === PLAY_GAME) {
+      return ({...state, playGame:true
+      });
+    }
   return state;
 };
 
