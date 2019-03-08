@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 import React from 'react';
 import ExampleScene from '../../scenes/ExampleScene'
+import gameSetup from '../../scenes/gameSetup'
+
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../../config";
 
@@ -22,17 +24,24 @@ export default class IGame extends React.Component {
   componentDidMount() {
     const config: GameConfig = {
       type: Phaser.AUTO,
-      width: GAME_WIDTH,
-      height: GAME_HEIGHT,
+      width: 480,
+      height: 320,
+      physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+      },
       parent: 'phaser-game',
-      scene: [ExampleScene],
+      scene: [gameSetup],
       canvasStyle: 'display: block',
       scale: {
        parent: 'phaser-example',
        mode: Phaser.Scale.FIT,
-       autoCenter: Phaser.Scale.CENTER_BOTH,
-       width: window.innerWidth,
-       height: window.innerHeight
+       autoCenter: Phaser.DOM.CENTER_BOTH,
+       width: 640,
+       height: 960
    },
     }
 
