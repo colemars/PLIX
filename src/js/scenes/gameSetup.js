@@ -51,7 +51,9 @@ export default class ExampleScene extends Phaser.Scene {
 
     this.bombs = this.physics.add.group();
 
-    let ground = platforms.create(0-96, this.sys.game.config.height-116, 'platformBottom').setOrigin(0, 0).refreshBody()
+    let ground = platforms.create(0-96, this.sys.game.config.height-116, 'platformBottom').setOrigin(0, 0).refreshBody();
+    let sideBar = platforms.create(this.sys.game.config.width-96, 0, 'sideBar').setOrigin(0, 0).refreshBody();
+    let bottomBar = platforms.create(0, this.sys.game.config.height-85, 'bottomBar').setOrigin(0, 0).refreshBody();
     console.log(this.sys.game.config.height);
     // ground.y = window.innerHeight
     console.log(ground.y);
