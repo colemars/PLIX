@@ -10,6 +10,7 @@ export default class ExampleScene extends Phaser.Scene {
     this.load.image('sky', 'assets/images/sky.png');
     this.load.image('bg', 'assets/images/background.png');
     this.load.image('ground', 'assets/images/greenBrick2.png');
+    this.load.image('outline', 'assets/images/brickOutline.png');
     this.load.image('star', 'assets/images/star.png');
     this.load.image('bomb', 'assets/images/bomb.png');
     this.load.image('platformBottom', 'assets/images/ground.png');
