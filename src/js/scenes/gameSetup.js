@@ -56,70 +56,60 @@ export default class ExampleScene extends Phaser.Scene {
     let ground = platforms.create(0-96, this.sys.game.config.height-116, 'platformBottom').setOrigin(0, 0).refreshBody();
     let sideBar = platforms.create(this.sys.game.config.width-96, 0, 'sideBar').setOrigin(0, 0).refreshBody();
     let bottomBar = platforms.create(0, this.sys.game.config.height-85, 'bottomBar').setOrigin(0, 0).refreshBody();
-    console.log(this.sys.game.config.height);
-    // ground.y = window.innerHeight
-    console.log(ground.y);
-    // ground.refreshBody()
 
     const setupScreenScale = .85
 
     let bricks = [];
-    for(let i=0;i<6;i++){
-      bricks.push(platforms.create(this.brickWidth*i*setupScreenScale, 800*setupScreenScale, 'ground').setOrigin(0, 0).refreshBody())
-    }
-
-
-
+    // for(let i=0;i<6;i++){
+    //   bricks.push(platforms.create(this.brickWidth*i*setupScreenScale, 800*setupScreenScale, 'ground').setOrigin(0, 0).refreshBody())
+    // }
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-
-       gameObject.x = dragX;
-       gameObject.y = dragY;
-
+      gameObject.x = dragX;
+      gameObject.y = dragY;
    });
-
-
+   const zone = [];
     for(let row of this.gameState){
       for(let position of row){
-        // console.log(position[0]);
-        if(position[0] === 1){
-          console.log('hit');
-           bricks.push(platforms.create(position[1]*setupScreenScale, position[2]*setupScreenScale, 'ground').setOrigin(0, 0).refreshBody())
+        if(position[0] === 0){
+          // bricks.push(platforms.create(position[1]*setupScreenScale, position[2]*setupScreenScale, 'outline').setOrigin(0, 0).refreshBody());
         }
       }
     }
-    const test = platforms.create(0, 220, 'ground').setOrigin(0, 0).refreshBody().setInteractive()
-    test.on('pointerover', function () {
 
-       this.setTint(0x00ff00);
-     })
-     test.on('pointerout', function () {
-
+    const plainBricks = [];
+    for(let i=0;i<10;i++){
+      plainBricks.push(platforms.create(556, 100, 'ground').setOrigin(0, 0).setScale(.66).refreshBody().setInteractive())
+    }
+    for(let plainBrick of plainBricks){
+      plainBrick.on('pointerover', function () {
+        this.setTint(0x00ff00);
+      })
+      plainBrick.on('pointerout', function () {
         this.clearTint();
+      });
+      this.input.setDraggable(plainBrick);
+    }
 
-    });
-
-    this.input.setDraggable(test);
 
     this.input.on('dragstart', function (pointer, gameObject) {
-
-        gameObject.setTint(0xff0000);
-
+      gameObject.setTint(0xff0000);
     });
-
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-
-        gameObject.x = dragX;
-        gameObject.y = dragY;
-        test.refreshBody();
-
+      gameObject.x = dragX;
+      gameObject.y = dragY;
+      if(gameObject.x > 500){
+        gameObject.setScale(.66)
+      } else {
+        gameObject.setScale(1).scaleX = .85
+        gameObject.displayHeight = 27
+      }
+      gameObject.refreshBody();
     });
-
     this.input.on('dragend', function (pointer, gameObject) {
-
-        gameObject.clearTint();
-
-
+      gameObject.clearTint();
     });
+
+
     // bricks.push(platforms.create(brickWidth*setupScreenScale, 800, 'ground').setOrigin(0, 0).refreshBody())
     // bricks.push(platforms.create(256*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
     // bricks.push(platforms.create(384*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
