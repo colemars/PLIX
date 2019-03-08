@@ -30,16 +30,6 @@ class UI extends React.Component {
     return (
       <div>
         {/* Left */}
-        <div
-          style={{
-            position: 'absolute',
-            left: leftOffset,
-            width: LEFT_UI_WIDTH,
-            height: GAME_HEIGHT,
-            backgroundColor: 'yellow',
-            opacity: 0.5
-          }}
-        />
         {/* Top */}
         <div>
           <Transition
