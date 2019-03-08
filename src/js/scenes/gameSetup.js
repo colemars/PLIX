@@ -93,22 +93,27 @@ export default class ExampleScene extends Phaser.Scene {
 
     this.input.on('dragstart', function (pointer, gameObject) {
       gameObject.setTint(0xff0000);
+      gameObject.setScale(1).scaleX = .85;
+      gameObject.displayHeight = 27;
     });
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
       gameObject.x = dragX;
       gameObject.y = dragY;
       if(gameObject.x > 500){
-        gameObject.setScale(.66)
       } else {
-        gameObject.setScale(1).scaleX = .85
-        gameObject.displayHeight = 27
+        // gameObject.setScale(1).scaleX = .85
+        // gameObject.displayHeight = 27
       }
       gameObject.refreshBody();
     });
-    this.input.on('dragend', function (pointer, gameObject) {
+    this.input.on('dragend', (pointer, gameObject) => {
       gameObject.clearTint();
+      if(gameObject.x > this.sys.game.config.width-96-gameObject.displayWidth) {
+        gameObject.setScale(.66)
+        gameObject.x = 556;
+        gameObject.y = 100;
+      }
     });
-
 
     // bricks.push(platforms.create(brickWidth*setupScreenScale, 800, 'ground').setOrigin(0, 0).refreshBody())
     // bricks.push(platforms.create(256*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
