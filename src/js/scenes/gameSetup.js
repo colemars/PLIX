@@ -9,25 +9,27 @@ export default class ExampleScene extends Phaser.Scene {
   preload(){
     this.load.image('sky', 'assets/images/sky.png');
     this.load.image('bg', 'assets/images/background.png');
-    this.load.image('ground', 'assets/images/platformSmall.png');
+    this.load.image('ground', 'assets/images/greenBrick2.png');
     this.load.image('star', 'assets/images/star.png');
     this.load.image('bomb', 'assets/images/bomb.png');
     this.load.image('platformBottom', 'assets/images/ground.png');
+    this.load.image('sideBar', 'assets/images/sideBar.png');
+    this.load.image('bottomBar', 'assets/images/bottomBar.png');
     this.load.spritesheet('dude',
       'assets/images/dude.png',
       { frameWidth: 32, frameHeight: 48 }
     );
-    const gameState = [];
-    const brickWidth = 128;
-    const brickHeight = 32;
+    this.gameState = [];
+    this.brickWidth = 107;
+    this.brickHeight = 32;
 
     for (let i=0;i<32;i++) {
-      gameState.push([])
-      for (let z=0;z<5;z++){
-        gameState[i].push([brickWidth*z, brickHeight*z])
+      this.gameState.push([])
+      for (let z=0;z<6;z++){
+        this.gameState[i].push([0,this.brickWidth*z, this.brickHeight*i])
       }
     }
-    console.log(gameState);
+    console.log(this.gameState);
   }
 
   create() {
