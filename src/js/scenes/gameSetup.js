@@ -22,8 +22,9 @@ export default class ExampleScene extends Phaser.Scene {
     this.gameState = [];
     this.brickWidth = 107;
     this.brickHeight = 32;
+    this.availableBricks = 10;
 
-    for (let i=0;i<32;i++) {
+    for (let i=0;i<31;i++) {
       this.gameState.push([])
       for (let z=0;z<6;z++){
         this.gameState[i].push([0,this.brickWidth*z, this.brickHeight*i])
