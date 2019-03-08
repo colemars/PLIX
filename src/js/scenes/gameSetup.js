@@ -126,6 +126,8 @@ export default class ExampleScene extends Phaser.Scene {
 
     for (let brick of bricks) {
       brick.displayWidth=brick.width*setupScreenScale
+      console.log(brick.height, 'height');
+      brick.displayHeight=27
       brick.refreshBody()
     }
 
