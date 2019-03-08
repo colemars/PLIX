@@ -66,6 +66,16 @@ export default class ExampleScene extends Phaser.Scene {
       bricks.push(platforms.create(this.brickWidth*i*setupScreenScale, 800*setupScreenScale, 'ground').setOrigin(0, 0).refreshBody())
     }
 
+
+
+    this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+
+       gameObject.x = dragX;
+       gameObject.y = dragY;
+
+   });
+
+
     for(let row of this.gameState){
       for(let position of row){
         // console.log(position[0]);
@@ -75,7 +85,39 @@ export default class ExampleScene extends Phaser.Scene {
         }
       }
     }
-    // bricks.push(platforms.create(0, 220, 'ground').setOrigin(0, 0).refreshBody())
+    const test = platforms.create(0, 220, 'ground').setOrigin(0, 0).refreshBody().setInteractive()
+    test.on('pointerover', function () {
+
+       this.setTint(0x00ff00);
+     })
+     test.on('pointerout', function () {
+
+        this.clearTint();
+
+    });
+
+    this.input.setDraggable(test);
+
+    this.input.on('dragstart', function (pointer, gameObject) {
+
+        gameObject.setTint(0xff0000);
+
+    });
+
+    this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+
+        gameObject.x = dragX;
+        gameObject.y = dragY;
+        test.refreshBody();
+
+    });
+
+    this.input.on('dragend', function (pointer, gameObject) {
+
+        gameObject.clearTint();
+
+
+    });
     // bricks.push(platforms.create(brickWidth*setupScreenScale, 800, 'ground').setOrigin(0, 0).refreshBody())
     // bricks.push(platforms.create(256*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
     // bricks.push(platforms.create(384*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
@@ -94,6 +136,7 @@ export default class ExampleScene extends Phaser.Scene {
 
     this.stars.children.iterate(function (child) {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      // child.setGravityY(Phaser.Math.FloatBetween(100, 800))
     });
 
 
@@ -179,7 +222,7 @@ export default class ExampleScene extends Phaser.Scene {
       this.player.anims.play('turn');
     }
     if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-630);
+      this.player.setVelocityY(-400);
     }
   }
 }
