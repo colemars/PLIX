@@ -62,11 +62,24 @@ export default class ExampleScene extends Phaser.Scene {
     const setupScreenScale = .85
 
     let bricks = [];
-    bricks.push(platforms.create(0, 220, 'ground').setOrigin(0, 0).refreshBody())
-    bricks.push(platforms.create(128*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
-    bricks.push(platforms.create(256*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
-    bricks.push(platforms.create(384*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
-    bricks.push(platforms.create(512*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
+    for(let i=0;i<6;i++){
+      bricks.push(platforms.create(this.brickWidth*i*setupScreenScale, 800*setupScreenScale, 'ground').setOrigin(0, 0).refreshBody())
+    }
+
+    for(let row of this.gameState){
+      for(let position of row){
+        // console.log(position[0]);
+        if(position[0] === 1){
+          console.log('hit');
+           bricks.push(platforms.create(position[1]*setupScreenScale, position[2]*setupScreenScale, 'ground').setOrigin(0, 0).refreshBody())
+        }
+      }
+    }
+    // bricks.push(platforms.create(0, 220, 'ground').setOrigin(0, 0).refreshBody())
+    // bricks.push(platforms.create(brickWidth*setupScreenScale, 800, 'ground').setOrigin(0, 0).refreshBody())
+    // bricks.push(platforms.create(256*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
+    // bricks.push(platforms.create(384*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
+    // bricks.push(platforms.create(512*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
 
     for (let brick of bricks) {
       brick.displayWidth=brick.width*setupScreenScale
