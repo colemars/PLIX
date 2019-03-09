@@ -127,10 +127,15 @@ export default class ExampleScene extends Phaser.Scene {
       brick.refreshBody()
     }
 
+    const bomb = this.bombs.create(100, 16, 'bomb');
+    bomb.setBounce(.1);
+    bomb.setCollideWorldBounds(true);
+    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+
     this.stars = this.physics.add.group({
       key: 'star',
       repeat: 11,
-      setXY: { x: 12, y: 0, stepX: 70 }
+      setXY: { x: 12, y: 0, stepX: 45 }
     });
 
     this.stars.children.iterate(function (child) {
