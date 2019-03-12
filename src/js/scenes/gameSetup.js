@@ -88,7 +88,27 @@ export default class ExampleScene extends Phaser.Scene {
 
     const setupScreenScale = .85
 
+
+    let graphics = this.add.graphics();
     let bricks = [];
+    const thickness = 1;
+    const color = 0x00ff00;
+    const alpha = 1;
+    // for(let row of this.gameState) {
+    //   for (let position of row) {
+    //     graphics.lineStyle(thickness, color, alpha);
+    //     graphics.strokeRect(position[1], position[2], this.cellWidth, this.cellHeight);
+    //     // let drawnObject;
+    //     // const bmd = game.add.bitmapData(this.cellWidth, this.cellHeight);
+    //     // bmd.ctx.beginPath();
+    //     // bmd.ctx.rect(0, 0, width, height);
+    //     // bmd.ctx.strokeStyle = '#ffffff';
+    //     // bmd.ctx.stroke();
+    //   }
+    // }
+
+
+
     // for(let i=0;i<6;i++){
     //   bricks.push(platforms.create(this.brickWidth*i*setupScreenScale, 800*setupScreenScale, 'ground').setOrigin(0, 0).refreshBody())
     // }
