@@ -231,15 +231,15 @@ export default class ExampleScene extends Phaser.Scene {
 
     if (this.stars.countActive(true) === 0) {
       this.stars.children.iterate(function (child) {
-      child.enableBody(true, child.x, 0, true, true);
-    });
+        child.enableBody(true, child.x, 0, true, true);
+      });
 
-    const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+      const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-    const bomb = this.bombs.create(x, 16, 'bomb');
-    bomb.setBounce(1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+      // const bomb = this.bombs.create(x, 16, 'bomb');
+      // bomb.setBounce(1);
+      // bomb.setCollideWorldBounds(true);
+      // bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
    }
   }
