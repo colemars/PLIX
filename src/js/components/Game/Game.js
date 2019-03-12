@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import React from 'react';
 import ExampleScene from '../../scenes/ExampleScene'
 import gameSetup from '../../scenes/gameSetup'
+import JumpingGame from '../../scenes/JumpingGame'
+
 
 
 import { GAME_HEIGHT, GAME_WIDTH } from "../../config";
