@@ -3,13 +3,15 @@ import { TOGGLE_UI } from "../constants/action-types";
 import { toggleUi } from "../actions/index";
 import Phaser from "phaser";
 import { GAME_HEIGHT, GAME_WIDTH } from "../config";
+import EasyStar from "easystarjs"
 
 export default class ExampleScene extends Phaser.Scene {
 
   preload(){
     this.load.image('sky', 'assets/images/sky.png');
+    this.load.image('gridObject', 'assets/images/gridObject.png');
     this.load.image('bg', 'assets/images/background.png');
-    this.load.image('ground', 'assets/images/greenBrick2.png');
+    this.load.image('ground', 'assets/images/platform.png');
     this.load.image('outline', 'assets/images/brickOutline.png');
     this.load.image('star', 'assets/images/star.png');
     this.load.image('bomb', 'assets/images/bomb.png');
