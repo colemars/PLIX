@@ -66,6 +66,16 @@ export default class ExampleScene extends Phaser.Scene {
       color: "blue",
       fontSize: 48
     });
+    const startText = this.add.text(50, 250, "Start", {
+      backgroundColor: "white",
+      color: "blue",
+      fontSize: 48
+    });
+    const findPathText = this.add.text(50, 450, "Find Path", {
+      backgroundColor: "white",
+      color: "blue",
+      fontSize: 48
+    });
     this.score = 0
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     this.player = this.physics.add.sprite(100, 450, 'dude');
@@ -162,7 +172,17 @@ export default class ExampleScene extends Phaser.Scene {
       // child.setGravityY(Phaser.Math.FloatBetween(100, 800))
     });
 
+    startText.setInteractive({ useHandCursor: true });
 
+    startText.on("pointerup", () => {
+      this.createLevel();
+    });
+
+    findPathText.setInteractive({ useHandCursor: true });
+
+    findPathText.on("pointerup", () => {
+      this.findPath();
+    });
 
     text.setInteractive({ useHandCursor: true });
 
