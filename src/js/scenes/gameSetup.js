@@ -23,16 +23,33 @@ export default class ExampleScene extends Phaser.Scene {
       { frameWidth: 32, frameHeight: 48 }
     );
     this.gameState = [];
-    this.brickWidth = 107;
-    this.brickHeight = 32;
+    this.testLevel = [[0,0,1,0,0],
+                     [1,0,1,0,1],
+          	         [0,0,1,0,0],
+          	         [0,0,1,1,0],
+          	         [0,0,0,0,0]];
+    this.level = [];
+    this.bricks = [];
+    this.brickWidth = 80;
+    this.brickHeight = 5;
+    this.cellWidth = 1;
+    this.cellHeight = 1;
     this.availableBricks = 10;
 
-    for (let i=0;i<31;i++) {
+    for (let i=0;i<960;i++) {
       this.gameState.push([])
-      for (let z=0;z<6;z++){
-        this.gameState[i].push([0,this.brickWidth*z, this.brickHeight*i])
+      for (let z=0;z<640;z++){
+        this.gameState[i].push([0,this.cellWidth*z, this.cellHeight*i,'y'])
       }
     }
+    console.log(this.gameState);
+    for (let i=0;i<960;i++) {
+      this.level.push([])
+      for (let z=0;z<640;z++){
+        this.level[i].push([0])
+      }
+    }
+
     console.log(this.gameState);
   }
 
