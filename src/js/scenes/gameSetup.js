@@ -96,41 +96,43 @@ export default class ExampleScene extends Phaser.Scene {
       gameObject.x = dragX;
       gameObject.y = dragY;
    });
-   const zone = [];
-    for(let row of this.gameState){
-      for(let position of row){
-        if(position[0] === 0){
-          // bricks.push(platforms.create(position[1]*setupScreenScale, position[2]*setupScreenScale, 'outline').setOrigin(0, 0).refreshBody());
-        }
-      }
-    }
+   // const zone = [];
+   //  for(let row of this.gameState){
+   //    for(let position of row){
+   //      if(position[0] === 0){
+   //        // bricks.push(platforms.create(position[1]*setupScreenScale, position[2]*setupScreenScale, 'gridObject').setOrigin(0, 0).refreshBody());
+   //      }
+   //    }
+   //  }
 
-    const plainBricks = [];
-    for(let i=0;i<10;i++){
-      plainBricks.push(platforms.create(556, 100, 'ground').setOrigin(0, 0).setScale(.66).refreshBody().setInteractive())
+
+    for(let i=0;i<1;i++){
+      this.bricks.push(platforms.create(556, 100, 'ground').setOrigin(0, 0).setScale(.8).refreshBody().setInteractive());
     }
-    for(let plainBrick of plainBricks){
-      plainBrick.on('pointerover', function () {
+    for(let brick of this.bricks){
+      brick.on('pointerover', function () {
         this.setTint(0x00ff00);
+        console.log(brick.x);
+        console.log(brick.y);
       })
-      plainBrick.on('pointerout', function () {
+      brick.on('pointerout', function () {
         this.clearTint();
       });
-      this.input.setDraggable(plainBrick);
+      this.input.setDraggable(brick);
     }
 
 
     this.input.on('dragstart', function (pointer, gameObject) {
       gameObject.setTint(0xff0000);
-      gameObject.setScale(1).scaleX = .85;
-      gameObject.displayHeight = 27;
+      gameObject.setScale(1)
+      // gameObject.displayHeight = 27;
     });
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
       gameObject.x = dragX;
       gameObject.y = dragY;
       if(gameObject.x > 500){
       } else {
-        // gameObject.setScale(1).scaleX = .85
+        gameObject.setScale(1)
         // gameObject.displayHeight = 27
       }
       gameObject.refreshBody();
