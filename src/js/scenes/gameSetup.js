@@ -172,8 +172,10 @@ export default class ExampleScene extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 45 }
     });
 
+    let k = .1;
     this.stars.children.iterate(function (child) {
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      child.setBounceY(k);
+      k+=.08
       // child.setGravityY(Phaser.Math.FloatBetween(100, 800))
     });
 
@@ -285,7 +287,7 @@ export default class ExampleScene extends Phaser.Scene {
   }
 
   collectStar (player, star) {
-    star.disableBody(true, true);
+    // star.disableBody(true, true);
 
     this.score += 10;
     this.scoreText.setText('Score: ' + this.score);
@@ -328,6 +330,7 @@ export default class ExampleScene extends Phaser.Scene {
     if (this.cursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-400);
     }
+
   }
 }
 
