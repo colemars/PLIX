@@ -209,6 +209,61 @@ export default class ExampleScene extends Phaser.Scene {
 
   }
 
+  createLevel(){
+    for(let row of this.gameState){
+      if (row[0][2] < 860){
+        for(let position of row){
+          if(position[1] < 540 ){
+            for(let brick of this.bricks){
+              const brickXPositions = [];
+              const brickYPositions = [];
+              if((position[2] >= Math.round(brick.y)) && (position[2] <= Math.round(brick.y+brick.height))){
+                if((position[1] >= Math.round(brick.x)) && (position[1] <= Math.round(brick.x+brick.width))) {
+                  position[0] = 1
+                  console.log(position[0]);
+                }
+              } else {
+                position[0] = 0;
+              }
+            }
+          }
+        }
+      }
+    }
+    console.log(this.gameState);
+
+    for(let i=0;i<this.gameState.length;i++){
+      for(let z=0;z<this.gameState[i].length;z++){
+        if(this.gameState[i][z][0] === 1){
+          console.log('hit');
+          this.level[i][z] = 1;
+        } else {
+          this.level[i][z] = 0;
+        }
+      }
+    }
+  }
+
+  findPath(){
+    this.easyStar = new EasyStar.js();
+    this.easyStar.setGrid(this.level);
+    console.log(this.level);
+    this.easyStar.setAcceptableTiles([0]);
+    this.easyStar.enableDiagonals();
+    this.easyStar.enableCornerCutting();
+    this.easyStar.findPath(Math.round(this.player.x), Math.round(this.player.y), 200, 200, function( path ) {
+        if (path === null) {
+	        console.log("The path to the destination point was not found.");
+  	    } else {
+  	    	for (var i = 0; i < path.length; i++){
+  	    		console.log("P: " + i + ", X: " + path[i].x + ", Y: " + path[i].y);
+  	    	}
+
+  	    }
+	   });
+     this.easyStar.calculate();
+  }
+
   collectStar (player, star) {
     star.disableBody(true, true);
 
