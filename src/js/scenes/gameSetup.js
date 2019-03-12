@@ -138,28 +138,11 @@ export default class ExampleScene extends Phaser.Scene {
     this.input.on('dragend', (pointer, gameObject) => {
       gameObject.clearTint();
       if(gameObject.x > this.sys.game.config.width-96-gameObject.displayWidth) {
-        gameObject.setScale(.66)
+        gameObject.setScale(.8)
         gameObject.x = 556;
         gameObject.y = 100;
       }
     });
-
-    // bricks.push(platforms.create(brickWidth*setupScreenScale, 800, 'ground').setOrigin(0, 0).refreshBody())
-    // bricks.push(platforms.create(256*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
-    // bricks.push(platforms.create(384*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
-    // bricks.push(platforms.create(512*setupScreenScale, 220, 'ground').setOrigin(0, 0).refreshBody())
-
-    for (let brick of bricks) {
-      brick.displayWidth=brick.width*setupScreenScale
-      console.log(brick.height, 'height');
-      brick.displayHeight=27
-      brick.refreshBody()
-    }
-
-    const bomb = this.bombs.create(100, 16, 'bomb');
-    bomb.setBounce(.1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
     this.stars = this.physics.add.group({
       key: 'star',
