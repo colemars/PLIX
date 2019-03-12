@@ -194,6 +194,7 @@ export default class ExampleScene extends Phaser.Scene {
     this.player.setBounce(0.1);
     this.player.setGravityY(600)
     this.player.setCollideWorldBounds(true);
+    this.player.setScale(.85)
 
     this.anims.create({
       key: 'left',
