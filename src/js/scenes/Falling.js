@@ -31,6 +31,7 @@ export default class Falling extends Phaser.Scene {
     this.player.setBounce(0.1); // our player will bounce from items
     this.player.setCollideWorldBounds(true); // don't go out of the map
     this.player.setGravityY(100)
+    this.player.setMaxVelocity(1000, 800);
     this.player.facingDirection = 'right';
 
     this.cursors = this.input.keyboard.createCursorKeys();
