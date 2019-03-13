@@ -42,12 +42,12 @@ class Menu extends React.Component {
   }
   render() {
     console.log(this.props.playGame);
-    let ui = !this.props.playGame ? <UI /> : null
-    let game = !this.props.playGame ? <Game /> : null
-    let header = this.props.playGame ? <Header /> : null
-    let body = this.props.playGame ? <Body /> : null
+    let ui = this.props.playGame ? <UI /> : null
+    let game = this.props.playGame ? <Game style={styles.game} /> : null
+    let header = !this.props.playGame ? <Header /> : null
+    let body = !this.props.playGame ? <Body /> : null
     return (
-      <div>
+      <div style={styles.game}>
         {ui}
         {game}
         <div style={styles.gamestartscreen}>
