@@ -110,6 +110,8 @@ export default class Falling extends Phaser.Scene {
       repeat: -1
     });
 
+    this.grayscalePipeline = this.game.renderer.addPipeline('Grayscale', new GrayscalePipeline(this.game));
+
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
 
@@ -146,8 +148,8 @@ export default class Falling extends Phaser.Scene {
           duration: 8000,
           yoyo: false,
           repeat: 0,
-          onStart: () => { this.updatePlayerAlpha(this.player)},
-          onComplete: function () { console.log('onComplete'); console.log(arguments); },
+          onStart: () => { this.updatePlayerAlpha(this.player, true)},
+          onComplete: () => { this.updatePlayerAlpha(this.player, false); this.cameras.main.setRenderToTexture(this.grayscalePipeline); },
           onYoyo: function () { console.log('onYoyo'); console.log(arguments); },
           onRepeat: function () { console.log('onRepeat'); console.log(arguments); },
         });
