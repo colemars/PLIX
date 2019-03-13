@@ -3,7 +3,8 @@ import { TOGGLE_UI } from "../constants/action-types";
 import { toggleUi } from "../actions/index";
 import Phaser from "phaser";
 import { GAME_HEIGHT, GAME_WIDTH } from "../config";
-import EasyStar from "easystarjs"
+import EasyStar from "easystarjs";
+import {GrayscalePipeline} from "../Pipelines.js"
 
 export default class Falling extends Phaser.Scene {
 
