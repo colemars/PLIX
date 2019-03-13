@@ -3,6 +3,8 @@ import React from 'react';
 import ExampleScene from '../../scenes/ExampleScene'
 import gameSetup from '../../scenes/gameSetup'
 import JumpingGame from '../../scenes/JumpingGame'
+import Falling from '../../scenes/Falling'
+
 
 
 
@@ -26,8 +28,8 @@ export default class IGame extends React.Component {
   componentDidMount() {
     const config: GameConfig = {
       type: Phaser.AUTO,
-      width: 480,
-      height: 320,
+      width: 1280,
+      height: 720,
       physics: {
         default: 'arcade',
         arcade: {
@@ -36,14 +38,12 @@ export default class IGame extends React.Component {
         }
       },
       parent: 'phaser-game',
-      scene: [gameSetup],
+      scene: [Falling],
       canvasStyle: 'display: block',
       scale: {
        parent: 'phaser-example',
        mode: Phaser.Scale.FIT,
        autoCenter: Phaser.DOM.CENTER_BOTH,
-       width: 640,
-       height: 960
    },
     }
 
