@@ -124,7 +124,60 @@ export default class Falling extends Phaser.Scene {
    // this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
    this.physics.add.collider(foregroundLayer, this.player);
+   this.physics.add.collider(foregroundLayer, this.flame);
+   this.player.journeyBegan = false;
+   this.physics.add.overlap(this.player, this.flame, this.beginJourney, null, this);
 
+
+  }
+
+  beginJourney(player, flame){
+    this.beginJourney = true;
+    // player.x = flame.x
+    if(this.player.journeyBegan === false){
+      setTimeout(()=> {
+        flame.anims.play('flame', true);
+        const tween = this.tweens.add({
+          targets: player,
+          y: 50,
+          x: flame.x,
+          ease: 'Power1',
+          duration: 8000,
+          yoyo: false,
+          repeat: 0,
+          onStart: () => { this.updatePlayerAlpha(this.player)},
+          onComplete: function () { console.log('onComplete'); console.log(arguments); },
+          onYoyo: function () { console.log('onYoyo'); console.log(arguments); },
+          onRepeat: function () { console.log('onRepeat'); console.log(arguments); },
+        });
+        this.player.journeyBegan = true;
+      }, 1000)
+    }
+  }
+
+  updatePlayerAlpha(player){
+    let i=0;
+    let z = 1;
+    if(!player.body.onFloor()){
+      const loop = setInterval(()=>{
+        let x = 1/i
+        player.setAlpha(x);
+        i++
+        if(i>10){
+          clearInterval(loop)
+          const newLoop = setInterval(()=>{
+            x = .1*z
+            player.setAlpha(x);
+            z++
+            if(z>10){
+              clearInterval(newLoop)
+              player.setAlpha(1)
+              this.updatePlayerAlpha(player)
+            }
+          },50)
+        }
+      },50)
+    }
   }
 
   update(time, delta){
