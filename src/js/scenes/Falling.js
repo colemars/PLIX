@@ -14,6 +14,14 @@ export default class Falling extends Phaser.Scene {
       'assets/images/otherDude4.png',
       { frameWidth: 32, frameHeight: 48 }
     );
+    this.load.spritesheet('dude',
+      'assets/images/otherDudeB&W.png',
+      { frameWidth: 32, frameHeight: 48 }
+    );
+    this.load.spritesheet('flame',
+      'assets/images/magic-flame2.png',
+      { frameWidth: 256, frameHeight: 300 }
+    );
   }
 
   create() {
