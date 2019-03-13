@@ -97,8 +97,8 @@ export default class Falling extends Phaser.Scene {
       repeat: -1
     });
     this.anims.create({
-      key: 'turnOld',
-      frames: [ { key: 'dude', frame: 8 } ],
+      key: 'still',
+      frames: [ { key: 'flame', frame: 8 } ],
       frameRate: 20
     });
 
