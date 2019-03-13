@@ -30,6 +30,9 @@ const styles = {
   gamestartscreen: {
     position: 'relative',
     zIndex: 2,
+  },
+  game: {
+    backgroundColor: 'black'
   }
 }
 class Menu extends React.Component {
