@@ -158,17 +158,20 @@ export default class Falling extends Phaser.Scene {
     }
   }
 
-  updatePlayerAlpha(player){
+  updatePlayerAlpha(player, bool){
     let i=0;
     let z = 1;
+    let loop,
+        newLoop;
+
     if(!player.body.onFloor()){
-      const loop = setInterval(()=>{
+       loop = setInterval(()=>{
         let x = 1/i
         player.setAlpha(x);
         i++
         if(i>10){
           clearInterval(loop)
-          const newLoop = setInterval(()=>{
+           newLoop = setInterval(()=>{
             x = .1*z
             player.setAlpha(x);
             z++
@@ -180,6 +183,9 @@ export default class Falling extends Phaser.Scene {
           },50)
         }
       },50)
+    } else {
+      clearInterval(loop)
+      clearInterval(newLoop)
     }
   }
 
