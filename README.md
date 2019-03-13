@@ -74,7 +74,7 @@ https://github.com/colemars/staticPLIX
 
 #Overview
 ![Components Tree](https://github.com/colemars/PLIX/blob/master/public/assets/images/components.png)
-![State Representation](https://github.com/colemars/PLIX/blob/master/assets/state.png)
+![State Representation](https://github.com/colemars/PLIX/blob/master/public/assets/images/state.png)
 
 ## State Slices
 
