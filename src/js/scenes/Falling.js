@@ -48,13 +48,23 @@ export default class Falling extends Phaser.Scene {
       repeat: -1
     });
     this.anims.create({
-      key: 'jumpLeft',
+      key: 'fallLeft',
       frames: [ { key: 'dude', frame: 17 } ],
       frameRate: 20
     });
     this.anims.create({
-      key: 'jumpRight',
+      key: 'fallRight',
       frames: [ { key: 'dude', frame: 16 } ],
+      frameRate: 20
+    });
+    this.anims.create({
+      key: 'jumpLeft',
+      frames: [ { key: 'dude', frame: 19 } ],
+      frameRate: 20
+    });
+    this.anims.create({
+      key: 'jumpRight',
+      frames: [ { key: 'dude', frame: 18 } ],
       frameRate: 20
     });
     this.anims.create({
@@ -121,7 +131,15 @@ export default class Falling extends Phaser.Scene {
     if (this.cursors.up.isDown && this.player.body.onFloor()) {
       this.player.setVelocityY(-300);
     }
-    if (!this.player.body.onFloor()){
+    if (this.player.body.velocity.y > 0 && !this.player.body.onFloor()){
+      if(this.player.facingDirection === 'left'){
+        this.player.anims.play('fallLeft', true);
+      }
+      if(this.player.facingDirection === 'right'){
+        this.player.anims.play('fallRight', true);
+      }
+    }
+    if (this.player.body.velocity.y < 0 && !this.player.body.onFloor()){
       if(this.player.facingDirection === 'left'){
         this.player.anims.play('jumpLeft', true);
       }
