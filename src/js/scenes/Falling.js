@@ -206,13 +206,13 @@ export default class Falling extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
 
-    const cursors = this.input.keyboard.createCursorKeys();
+    // const cursors = this.input.keyboard.createCursorKeys();
     // const controlConfig = {
     //    camera: this.cameras.main,
-    //    left: cursors.left,
-    //    right: cursors.right,
-    //    up: cursors.up,
-    //    down: cursors.down,
+    //    a: cursors.left,
+    //    d: cursors.right,
+    //    w: cursors.up,
+    //    s: cursors.down,
     //    speed: 0.5
     // };
    // this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
