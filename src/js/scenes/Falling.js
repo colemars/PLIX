@@ -97,6 +97,7 @@ export default class Falling extends Phaser.Scene {
     this.player.health = 10;
     this.player.health = 5;
     this.player.abilityCoolDown = true;
+    this.jumpSound = this.sound.add('jumpSound');
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
