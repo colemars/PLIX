@@ -117,9 +117,23 @@ export default class Falling extends Phaser.Scene {
       frameRate: 15,
       repeat: 0
     });
+
+    this.anims.create({
+      key: 'portal',
+      frames: this.anims.generateFrameNumbers('flame',{start: 21, end: 40}),
+      frameRate: 15,
+      repeat: 0
+    });
+
     this.anims.create({
       key: 'fireball',
       frames: this.anims.generateFrameNumbers('fireball',{start: 0, end: 56}),
+      frameRate: 15,
+      repeat: 0
+    });
+    this.anims.create({
+      key: 'explodingFireball',
+      frames: this.anims.generateFrameNumbers('explodingFireball',{start: 0, end: 56}),
       frameRate: 15,
       repeat: 0
     });
