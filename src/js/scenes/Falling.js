@@ -95,6 +95,7 @@ export default class Falling extends Phaser.Scene {
     this.player.setMaxVelocity(1000, 800);
     this.player.facingDirection = 'right';
     this.player.health = 10;
+    this.player.health = 5;
     this.player.abilityCoolDown = true;
 
     this.cursors = this.input.keyboard.createCursorKeys();
