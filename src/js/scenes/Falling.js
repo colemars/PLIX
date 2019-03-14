@@ -101,6 +101,8 @@ export default class Falling extends Phaser.Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.pauseButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
     this.anims.create({
       key: 'flame',
