@@ -251,7 +251,35 @@ export default class Falling extends Phaser.Scene {
   }
 
   update(time, delta){
-    
+    this.bats.children.iterate((child) => {
+      child.anims.play('bat', true);
+      if(child.flyingLeft === true){
+        child.setVelocityX(-160)
+      } if(child.flyingRight === true){
+        child.setVelocityX(160)
+      }
+      if(child.body.blocked.right === true){
+        child.flyingRight = false;
+        child.flyingLeft = true;
+      }
+      if(child.body.blocked.left === true){
+        child.flyingLeft = false;
+        child.flyingRight = true;
+      }
+    })
+    if (this.spaceKey.isDown){
+      if(this.player.abilityCoolDown){
+        console.log('hit');
+        this.fireball = this.physics.add.sprite(this.player.x, this.player.y+5, 'fireball');
+        this.fireball.play('fireball', true);
+        this.flame.setVelocityY(300)
+        this.player.abilityCoolDown = false;
+      } else {
+        setTimeout(()=>{
+          this.player.abilityCoolDown = true;
+        },1000)
+      }
+    }
     if (this.cursors.left.isDown) {
       this.player.facingDirection = 'left';
       this.player.setVelocityX(-160);
