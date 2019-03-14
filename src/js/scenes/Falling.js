@@ -274,10 +274,61 @@ export default class Falling extends Phaser.Scene {
           onYoyo: function () { console.log('onYoyo'); console.log(arguments); },
           onRepeat: function () { console.log('onRepeat'); console.log(arguments); },
         });
-        this.player.journeyBegan = true;
       }, 1000)
     }
   }
+
+  shootFireball(){
+    let loop;
+    let i=11;
+    let z = 1;
+    if(this.player.abilityCoolDown){
+      let fade = true;
+      setTimeout(()=>{
+        this.grayscalePipeline.setIntensity(1);
+        clearInterval(loop);
+      },500);
+      loop = setInterval(()=>{
+        let x = 10/i;
+        i++;
+        this.grayscalePipeline.setIntensity(x);
+      },50)
+      let fireballSound = this.sound.add('fireballSound')
+      fireballSound.play();
+      // fireballSound.stop();
+      this.player.abilityCoolDown = false;
+      this.fireballs.create(this.player.x, this.player.y-20, 'fireball')
+      this.fireballs.children.iterate((child) => {
+        child.setSize(32, 32, true);
+        child.setVelocityY(400);
+        child.anims.play('fireball', true);
+      })
+      this.player.setVelocityY(-100)
+    } else {
+      setTimeout(()=>{
+        this.player.abilityCoolDown = true;
+      },10)
+    }
+  }
+
+  fireballExplode(fireball, enemy){
+    fireball.anims.play('explodingFireball', true);
+    fireball.setTint(0xFF1100);
+    setTimeout(()=>{
+      fireball.disableBody(true, true);
+    },150);
+    enemy.health -= 1;
+    if (enemy.health < 1){
+      this.player.doubleJump = true;
+      this.score += 10;
+      this.events.emit('addScore');
+      enemy.setTint(0xFF1100)
+      enemy.disableBody(true, true);
+    }
+    console.log(enemy);
+  }
+
+
 
   updatePlayerAlpha(player, bool){
     let i=11;
