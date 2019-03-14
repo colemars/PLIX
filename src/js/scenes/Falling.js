@@ -157,13 +157,25 @@ export default class Falling extends Phaser.Scene {
     //    speed: 0.5
     // };
    // this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
-
    this.physics.add.collider(foregroundLayer, this.player);
+   this.physics.add.collider(this.bats, this.player, this.playerEnemyCollide, null, this);
+   this.physics.add.collider(foregroundLayer, this.bats);
    this.physics.add.collider(foregroundLayer, this.flame);
    this.player.journeyBegan = false;
    this.physics.add.overlap(this.player, this.flame, this.beginJourney, null, this);
+  }
 
-
+  playerEnemyCollide(player, enemy){
+    enemy.flyingLeft = !enemy.flyingLeft;
+    enemy.flyingRight = !enemy.flyingRight;
+    player.health -= 1;
+    enemy.health -=1;
+    player.setTint(0xFF1100);
+    this.cameras.main.shake(50,0.05)
+    setTimeout(()=> {
+      player.clearTint();
+    },100)
+    console.log(player.health);
   }
 
   beginJourney(player, flame){
