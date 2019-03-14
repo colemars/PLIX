@@ -10,18 +10,22 @@ export default class Falling extends Phaser.Scene {
 
   preload(){
     this.load.image('tiles', 'assets/platformertiles-extruded.png')
-    this.load.tilemapTiledJSON('map', 'assets/falling-game-map.json')
+    this.load.tilemapTiledJSON('map', 'assets/falling-game-map2.json')
     this.load.spritesheet('dude',
       'assets/images/otherDude4.png',
       { frameWidth: 32, frameHeight: 48 }
     );
-    this.load.spritesheet('dude',
-      'assets/images/otherDudeB&W.png',
-      { frameWidth: 32, frameHeight: 48 }
+    this.load.spritesheet('bat',
+      'assets/images/bat.png',
+      { frameWidth: 32, frameHeight: 32 }
     );
     this.load.spritesheet('flame',
       'assets/images/magic-flame2.png',
       { frameWidth: 256, frameHeight: 300 }
+    );
+    this.load.spritesheet('fireball',
+      'assets/images/wind_fireball.png',
+      { frameWidth: 256, frameHeight: 256 }
     );
   }
 
