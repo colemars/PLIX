@@ -4,6 +4,7 @@ import ExampleScene from '../../scenes/ExampleScene'
 import gameSetup from '../../scenes/gameSetup'
 import JumpingGame from '../../scenes/JumpingGame'
 import Falling from '../../scenes/Falling'
+import UIScene from '../../scenes/UIScene'
 
 
 
@@ -38,7 +39,7 @@ export default class IGame extends React.Component {
         }
       },
       parent: 'phaser-game',
-      scene: [Falling],
+      scene: [Falling, UIScene],
       canvasStyle: 'display: block',
       scale: {
        parent: 'phaser-example',
