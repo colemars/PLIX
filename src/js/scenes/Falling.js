@@ -88,6 +88,9 @@ export default class Falling extends Phaser.Scene {
 
     this.flame = this.physics.add.sprite(460, 100, 'flame');
 
+    this.portal = this.physics.add.sprite(620, backgroundLayer.height+400, 'flame').setScale(4);
+    this.portal.flipY = true;
+    this.portal.body.moves = false;
     this.player = this.physics.add.sprite(10, 10, 'dude');
     this.player.setBounce(0.1); // our player will bounce from items
     this.player.setCollideWorldBounds(true); // don't go out of the map
