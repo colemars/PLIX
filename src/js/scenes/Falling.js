@@ -237,13 +237,19 @@ export default class Falling extends Phaser.Scene {
     setTimeout(()=> {
       player.clearTint();
     },100)
-    console.log(player.health);
+    if(enemy.health < 1){
+      enemy.setTint(0xFF1100)
+      enemy.disableBody(true, true);
+    }
   }
+
+
 
   beginJourney(player, flame){
     this.beginJourney = true;
-    // player.x = flame.x
     if(this.player.journeyBegan === false){
+      this.player.journeyBegan = true;
+      console.log('begin');
       setTimeout(()=> {
         flame.anims.play('flame', true);
         const tween = this.tweens.add({
