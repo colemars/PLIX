@@ -374,24 +374,28 @@ export default class Falling extends Phaser.Scene {
         child.flyingRight = true;
       }
     })
-    if (this.spaceKey.isDown){
-      if(this.player.abilityCoolDown){
-        console.log('hit');
-        this.fireball = this.physics.add.sprite(this.player.x, this.player.y+5, 'fireball');
-        this.fireball.play('fireball', true);
-        this.flame.setVelocityY(300)
-        this.player.abilityCoolDown = false;
-      } else {
-        setTimeout(()=>{
-          this.player.abilityCoolDown = true;
-        },1000)
-      }
+    if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
+      this.shootFireball();
     }
     if (this.cursors.left.isDown) {
+      if(this.player.body.onFloor() && this.footStepsTimeOut){
+        this.footStepsTimeOut = false;
+        this.footSteps.play();
+        setTimeout(()=>{
+          this.footStepsTimeOut=true
+        },250)
+      }
       this.player.facingDirection = 'left';
       this.player.setVelocityX(-160);
       this.player.anims.play('left', true);
     } else if (this.cursors.right.isDown) {
+      if(this.player.body.onFloor() && this.footStepsTimeOut){
+        this.footStepsTimeOut = false;
+        this.footSteps.play();
+        setTimeout(()=>{
+          this.footStepsTimeOut=true
+        },250)
+      }
       this.player.facingDirection = 'right';
       this.player.setVelocityX(160);
       this.player.anims.play('right', true);
