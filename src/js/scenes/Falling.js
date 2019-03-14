@@ -408,9 +408,21 @@ export default class Falling extends Phaser.Scene {
         this.player.anims.play('idleRight', true);
       }
     }
-    if (this.cursors.up.isDown && this.player.body.onFloor()) {
-      this.player.setVelocityY(-300);
+    if (Phaser.Input.Keyboard.JustDown(this.cursors.up)) {
+      if(this.player.body.blocked.down){
+        this.jumpSound.play()
+        this.player.setVelocityY(-300);
+      } else if(this.player.doubleJump){
+        this.jumpSound.play()
+        this.player.doubleJump = false;
+        this.player.setVelocityY(-150);
+      }
     }
+    if ((this.player.body.onFloor() || !this.player.body.touching.none) && !this.player.doubleJump) {
+      this.player.doubleJump = true;
+      console.log('doublejump restored');
+    }
+
     if (this.player.body.velocity.y > 0 && !this.player.body.onFloor()){
       if(this.player.facingDirection === 'left'){
         this.player.anims.play('fallLeft', true);
