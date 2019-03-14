@@ -27,7 +27,7 @@ function rootReducer(state = initialState, action) {
       });
     }
   if (action.type === PLAY_GAME) {
-      return ({...state, playGame:true
+      return ({...state, playGame:!state.playGame
       });
     }
   return state;
