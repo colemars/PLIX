@@ -50,6 +50,24 @@ export default class Falling extends Phaser.Scene {
     const backgroundLayer = map.createStaticLayer('background', tiles, 0, 0);
     const foregroundLayer = map.createDynamicLayer('foreground', tiles, 0, 0);
 
+    this.trueHeight = backgroundLayer.height;
+    this.trueWidth = backgroundLayer.width;
+
+    this.backgroundMusic = this.sound.add('backgroundMusic');
+    this.magicTrapSound = this.sound.add('magicTrap2');
+    const footStepsSoundConfig = {
+      mute: false,
+      volume: .2,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: false,
+      delay: 5
+    }
+    this.footSteps = this.sound.add('footsteps', footStepsSoundConfig);
+    this.footStepsTimeOut = true;
+
+
     foregroundLayer.setCollisionByExclusion([-1]);
 
     this.physics.world.bounds.width = backgroundLayer.width;
