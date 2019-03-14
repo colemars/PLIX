@@ -35,8 +35,12 @@ export default class Falling extends Phaser.Scene {
       { frameWidth: 256, frameHeight: 300 }
     );
     this.load.spritesheet('fireball',
-      'assets/images/wind_fireball.png',
-      { frameWidth: 256, frameHeight: 256 }
+      'assets/images/sparkling-fireball-wind-128.png',
+      { frameWidth: 128, frameHeight: 128}
+    );
+    this.load.spritesheet('explodingFireball',
+      'assets/images/exploding-fireball-128.png',
+      { frameWidth: 128, frameHeight: 128 }
     );
   }
 
