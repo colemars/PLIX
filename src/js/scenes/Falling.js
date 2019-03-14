@@ -262,12 +262,13 @@ export default class Falling extends Phaser.Scene {
           repeat: 0,
           onStart: () => {
             this.player.body.moves = false;
+            this.magicTrapSound.play();
             this.updatePlayerAlpha(this.player, true);
           },
           onComplete: () => {
             setTimeout(()=> {
               this.player.body.moves = true;
-              console.log(this.player.body.moves);
+              this.backgroundMusic.play();
             },500); this.cameras.main.setRenderToTexture(this.grayscalePipeline);
           },
           onYoyo: function () { console.log('onYoyo'); console.log(arguments); },
