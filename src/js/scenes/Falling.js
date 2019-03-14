@@ -227,6 +227,7 @@ export default class Falling extends Phaser.Scene {
   }
 
   playerEnemyCollide(player, enemy){
+    this.events.emit('loseHealth');
     enemy.flyingLeft = !enemy.flyingLeft;
     enemy.flyingRight = !enemy.flyingRight;
     player.health -= 1;
