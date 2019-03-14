@@ -75,8 +75,8 @@ export default class Falling extends Phaser.Scene {
 
     this.bats = this.physics.add.group({
       key: 'bat',
-      repeat: 1,
-      setXY: { x: 550, y: 300, stepX: 45, stepY: 50 }
+      repeat: 37,
+      setXY: { x: 550, y: 750, stepX: 45, stepY: 150 }
     });
     this.bats.children.iterate((child) => {
       child.setCollideWorldBounds(true); // don't go out of the map
