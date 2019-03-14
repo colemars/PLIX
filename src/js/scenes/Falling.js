@@ -211,37 +211,47 @@ export default class Falling extends Phaser.Scene {
   }
 
   updatePlayerAlpha(player, bool){
-    let i=0;
+    let i=11;
     let z = 1;
     let loop,
         newLoop;
 
     if(!player.body.onFloor()){
+      let fade = true;
        loop = setInterval(()=>{
-        let x = 1/i
-        player.setAlpha(x);
-        i++
-        if(i>10){
-          clearInterval(loop)
-           newLoop = setInterval(()=>{
-            x = .1*z
-            player.setAlpha(x);
-            z++
-            if(z>10){
-              clearInterval(newLoop)
-              player.setAlpha(1)
-              this.updatePlayerAlpha(player)
-            }
-          },50)
+         let x = 10/i
+         if(i === 50){
+           fade = false
+         }
+         if( i < 10){
+           fade = true
+         }
+        if(fade){
+          i++
+        }else {
+          i--
         }
+        player.setAlpha(x);
+
+        // if(i>50){
+        //   clearInterval(loop)
+        //    newLoop = setInterval(()=>{
+        //     x =
+        //     player.setAlpha(x);
+        //     z++
+        //     if(z>10){
+        //       clearInterval(newLoop)
+        //       player.setAlpha(1)
+        //       this.updatePlayerAlpha(player)
+        //     }
+        //   },100)
+        // }
       },50)
-    } else {
-      clearInterval(loop)
-      clearInterval(newLoop)
     }
   }
 
   update(time, delta){
+    
     if (this.cursors.left.isDown) {
       this.player.facingDirection = 'left';
       this.player.setVelocityX(-160);
