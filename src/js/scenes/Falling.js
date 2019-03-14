@@ -439,10 +439,27 @@ export default class Falling extends Phaser.Scene {
         this.player.anims.play('jumpRight', true);
       }
     }
+    if(this.player.health < 1){
+
+      console.log('game over');
+      this.physics.pause();
+      this.gameOver = true;
+      this.cameras.main.fade(9000);
+      setTimeout(()=>{
+        this.backgroundMusic.stop();
+        this.scene.restart();
+      },9000)
+    }
+    if(this.player.y > this.trueHeight-50){
+      console.log('next level');
+      this.cameras.main.fade(9000);
+      this.nextLevel = true;
+      setTimeout(()=>{
+        this.scene.restart();
+        this.backgroundMusic.stop();
+      },9000)
+    }
   }
-
-
-
 }
 
 function mapDispatchToProps(dispatch) {
