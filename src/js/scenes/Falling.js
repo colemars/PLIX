@@ -220,6 +220,8 @@ export default class Falling extends Phaser.Scene {
    this.physics.add.collider(this.bats, this.player, this.playerEnemyCollide, null, this);
    this.physics.add.collider(foregroundLayer, this.bats);
    this.physics.add.collider(foregroundLayer, this.flame);
+   this.physics.add.collider(this.fireballs, foregroundLayer, this.fireballExplode, null, this);
+   this.physics.add.collider(this.fireballs, this.bats, this.fireballExplode, null, this);
    this.player.journeyBegan = false;
    this.physics.add.overlap(this.player, this.flame, this.beginJourney, null, this);
   }
