@@ -92,20 +92,22 @@ export default class Falling extends Phaser.Scene {
     this.portal = this.physics.add.sprite(620, backgroundLayer.height+400, 'flame').setScale(4);
     this.portal.flipY = true;
     this.portal.body.moves = false;
+
     this.player = this.physics.add.sprite(10, 10, 'dude');
-    this.player.setBounce(0.1); // our player will bounce from items
+    this.player.setBounce(0); // our player will bounce from items
     this.player.setCollideWorldBounds(true); // don't go out of the map
-    this.player.setGravityY(100)
+    this.player.setGravityY(100);
     this.player.setMaxVelocity(1000, 800);
     this.player.facingDirection = 'right';
-    this.player.health = 10;
     this.player.health = 5;
     this.player.abilityCoolDown = true;
+    this.player.doubleJump = true;
+
     this.jumpSound = this.sound.add('jumpSound');
 
     this.fireballs = this.physics.add.group();
+
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.pauseButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
