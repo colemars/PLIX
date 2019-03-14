@@ -84,6 +84,7 @@ export default class Falling extends Phaser.Scene {
       child.flyingRight = true;
       child.flyingLeft = false;
       child.body.immovable = true;
+      child.health = 1;
     })
 
     this.flame = this.physics.add.sprite(460, 100, 'flame');
