@@ -40,6 +40,32 @@ export default class Falling extends Phaser.Scene {
     this.physics.world.bounds.width = backgroundLayer.width;
     this.physics.world.bounds.height = backgroundLayer.height;
 
+    this.bats = this.physics.add.group({
+      key: 'bat',
+      repeat: 1,
+      setXY: { x: 550, y: 300, stepX: 45, stepY: 50 }
+    });
+    this.bats.children.iterate((child) => {
+      child.setCollideWorldBounds(true); // don't go out of the map
+      child.body.setAllowGravity(false);
+      child.flyingRight = true;
+      child.flyingLeft = false;
+      child.body.immovable = true;
+    })
+
+    this.flame = this.physics.add.sprite(460, 100, 'flame');
+
+    this.player = this.physics.add.sprite(10, 10, 'dude');
+    this.player.setBounce(0.1); // our player will bounce from items
+    this.player.setCollideWorldBounds(true); // don't go out of the map
+    this.player.setGravityY(100)
+    this.player.setMaxVelocity(1000, 800);
+    this.player.facingDirection = 'right';
+    this.player.health = 10;
+    this.player.abilityCoolDown = true;
+
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     this.anims.create({
       key: 'flame',
@@ -47,16 +73,18 @@ export default class Falling extends Phaser.Scene {
       frameRate: 15,
       repeat: 0
     });
-
-    this.player = this.physics.add.sprite(10, 10, 'dude');
-    this.flame = this.physics.add.sprite(460, 100, 'flame');
-    this.player.setBounce(0.1); // our player will bounce from items
-    this.player.setCollideWorldBounds(true); // don't go out of the map
-    this.player.setGravityY(100)
-    this.player.setMaxVelocity(1000, 800);
-    this.player.facingDirection = 'right';
-
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.anims.create({
+      key: 'fireball',
+      frames: this.anims.generateFrameNumbers('fireball',{start: 0, end: 56}),
+      frameRate: 15,
+      repeat: 0
+    });
+    this.anims.create({
+      key: 'bat',
+      frames: this.anims.generateFrameNumbers('bat',{start: 0, end: 16}),
+      frameRate: 15,
+      repeat: 0
+    });
     this.anims.create({
       key: 'idleLeft',
       frames: this.anims.generateFrameNumbers('dude',{start: 6, end: 7}),
