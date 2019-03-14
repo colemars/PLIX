@@ -4,12 +4,23 @@ import { toggleUi } from "../actions/index";
 import Phaser from "phaser";
 import { GAME_HEIGHT, GAME_WIDTH } from "../config";
 import EasyStar from "easystarjs";
-import {GrayscalePipeline} from "../Pipelines.js"
+import GrayscalePipeline from "../GrayScalePipeline.js"
 
 export default class Falling extends Phaser.Scene {
 
+  constructor () {
+    super({key: 'Falling', active: true});
+
+    this.score = 0;
+  }
+
   preload(){
     this.load.image('tiles', 'assets/platformertiles-extruded.png')
+    this.load.audio('backgroundMusic', 'assets/audio/adventure.mp3')
+    this.load.audio('magicTrap2', 'assets/audio/magicTrap2.mp3')
+    this.load.audio('fireballSound', 'assets/audio/sfx_exp_short_hard15.wav')
+    this.load.audio('footsteps', 'assets/audio/sfx_movement_footsteps1b.wav')
+    this.load.audio('jumpSound', 'assets/audio/sfx_movement_jump19_landing.wav')
     this.load.tilemapTiledJSON('map', 'assets/falling-game-map2.json')
     this.load.spritesheet('dude',
       'assets/images/otherDude4.png',
