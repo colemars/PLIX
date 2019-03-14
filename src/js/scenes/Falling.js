@@ -352,25 +352,12 @@ export default class Falling extends Phaser.Scene {
           i--
         }
         player.setAlpha(x);
-
-        // if(i>50){
-        //   clearInterval(loop)
-        //    newLoop = setInterval(()=>{
-        //     x =
-        //     player.setAlpha(x);
-        //     z++
-        //     if(z>10){
-        //       clearInterval(newLoop)
-        //       player.setAlpha(1)
-        //       this.updatePlayerAlpha(player)
-        //     }
-        //   },100)
-        // }
       },50)
     }
   }
 
   update(time, delta){
+    this.portal.anims.play('portal', true);
     this.bats.children.iterate((child) => {
       child.anims.play('bat', true);
       if(child.flyingLeft === true){
