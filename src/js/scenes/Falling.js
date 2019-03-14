@@ -201,6 +201,7 @@ export default class Falling extends Phaser.Scene {
     });
 
     this.grayscalePipeline = this.game.renderer.addPipeline('Grayscale', new GrayscalePipeline(this.game));
+    this.grayscalePipeline.setIntensity(1);
 
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
