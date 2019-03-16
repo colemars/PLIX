@@ -450,15 +450,7 @@ export default class Falling extends Phaser.Scene {
       }
     }
     if(this.player.health < 1){
-
-      console.log('game over');
-      this.physics.pause();
       this.gameOver = true;
-      this.cameras.main.fade(9000);
-      setTimeout(()=>{
-        this.backgroundMusic.stop();
-        this.scene.restart();
-      },9000)
     }
     if(this.player.y > this.trueHeight-50){
       if(this.player.journeyBegan === true){
@@ -470,6 +462,17 @@ export default class Falling extends Phaser.Scene {
         },9000);
       }
     }
+    if(this.gameOver === true){
+      if(this.player.journeyBegan === true){
+        this.player.journeyBegan = false;
+        this.gameOver = false;
+        this.physics.pause();
+        this.cameras.main.fade(9000);
+        setTimeout(()=>{
+          this.backgroundMusic.stop();
+          this.scene.restart();
+        },9000);
+      }
     }
   }
 }
