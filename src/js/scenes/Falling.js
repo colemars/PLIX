@@ -461,13 +461,15 @@ export default class Falling extends Phaser.Scene {
       },9000)
     }
     if(this.player.y > this.trueHeight-50){
-      console.log('next level');
-      this.cameras.main.fade(9000);
-      this.nextLevel = true;
-      setTimeout(()=>{
-        this.scene.restart();
-        this.backgroundMusic.stop();
-      },9000)
+      if(this.player.journeyBegan === true){
+        this.cameras.main.fade(9000);
+        this.nextLevel = true;
+        setTimeout(()=>{
+          this.backgroundMusic.stop();
+          this.scene.restart();
+        },9000);
+      }
+    }
     }
   }
 }
