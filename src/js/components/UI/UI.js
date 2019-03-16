@@ -1,13 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Transition } from "react-spring";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Transition } from 'react-spring';
 import Grid from '@material-ui/core/Grid';
 import {v4} from 'uuid';
-import MenuButton from '../Home/Body/MenuButton'
-
-
-
-import { GAME_HEIGHT, GAME_WIDTH } from "../../config";
+import MenuButton from '../Home/Body/MenuButton';
+import PropTypes from 'prop-types';
+import { GAME_HEIGHT, GAME_WIDTH } from '../../config';
 
 const styles = {
   button: {
@@ -54,37 +52,37 @@ class UI extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ leftOffset: this.calculateLeftOffset() })
+    this.setState({ leftOffset: this.calculateLeftOffset() });
 
     window.addEventListener('resize', () => {
-      this.setState({ leftOffset: this.calculateLeftOffset() })
-    })
+      this.setState({ leftOffset: this.calculateLeftOffset() });
+    });
   }
 
   calculateLeftOffset = () => {
-    return window.innerWidth / 2 - ((GAME_WIDTH/4)/2)
+    return window.innerWidth / 2 - ((GAME_WIDTH/4)/2);
   }
 
   render() {
     console.log(this.props);
-    const { showUi } = this.props
-    const { leftOffset } = this.state
+    const { showUi } = this.props;
+    const { leftOffset } = this.state;
     return (
       <div>
         {/* Left */}
         {/* Top */}
         <div>
           <Transition
-            items={showUi}
-            from={{ marginTop: -GAME_HEIGHT/2 }}
-            enter={{ marginTop: 100 }}
-            leave={{ marginTop: -GAME_HEIGHT/2 }}
+            items = {showUi}
+            from = {{ marginTop: -GAME_HEIGHT/2 }}
+            enter = {{ marginTop: 100 }}
+            leave = {{ marginTop: -GAME_HEIGHT/2 }}
           >
             {show =>
               show &&
               (props => (
                 <div
-                  style={{
+                  style = {{
                     ...props,
                     position: 'absolute',
                     width: GAME_WIDTH/4,
@@ -94,31 +92,31 @@ class UI extends React.Component {
                     left: leftOffset,
                   }}
                 >
-                <div style={{
-                  ...props,
-                  fontSize: '1.5vw',
-                  fontFamily: 'Rubik',
-                  position: 'relative',
-                  opacity: 0.9,
-                  top: 0
-                }}>
-                <Grid style={styles.menu} container spacing = {0}>
-                  {['Home','Saved Games','Account','How To Play','Customize'].map(value => (
-                      <Grid key={v4()} item xs = {12}>
-                        <div style={styles.menuItem}>
-                          <MenuButton selection={value} key={v4()} id={value} />
-                        </div>
-                      </Grid>
-                  ))}
-                </Grid>
+                  <div style = {{
+                    ...props,
+                    fontSize: '1.5vw',
+                    fontFamily: 'Rubik',
+                    position: 'relative',
+                    opacity: 0.9,
+                    top: 0
+                  }}>
+                    <Grid style = {styles.menu} container spacing = {0}>
+                      {['Home','Saved Games','Account','How To Play','Customize'].map(value => (
+                        <Grid key = {v4()} item xs = {12}>
+                          <div style = {styles.menuItem}>
+                            <MenuButton selection = {value} key = {v4()} id = {value} />
+                          </div>
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </div>
                 </div>
-              </div>
               ))
             }
           </Transition>
         </div>
       </div>
-    )
+    );
   }
 }
 

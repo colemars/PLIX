@@ -19,7 +19,7 @@ const styles = {
 function Title(){
   return (
 
-          <div style = {styles.title}>PLIX.DEV</div>
+    <div style = {styles.title}>PLIX.DEV</div>
 
   );
 }

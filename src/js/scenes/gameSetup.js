@@ -1,9 +1,9 @@
-import store from "../store";
-import { TOGGLE_UI } from "../constants/action-types";
-import { toggleUi } from "../actions/index";
-import Phaser from "phaser";
-import { GAME_HEIGHT, GAME_WIDTH } from "../config";
-import EasyStar from "easystarjs"
+import store from '../store';
+import { TOGGLE_UI } from '../constants/action-types';
+import { toggleUi } from '../actions/index';
+import Phaser from 'phaser';
+import { GAME_HEIGHT, GAME_WIDTH } from '../config';
+import EasyStar from 'easystarjs';
 
 export default class ExampleScene extends Phaser.Scene {
 
@@ -24,7 +24,7 @@ export default class ExampleScene extends Phaser.Scene {
     );
     this.gameState = [];
     this.testLevel = [[0,0,1,0,0],
-                     [1,0,1,0,1],
+      [1,0,1,0,1],
           	         [0,0,1,0,0],
           	         [0,0,1,1,0],
           	         [0,0,0,0,0]];
@@ -37,16 +37,16 @@ export default class ExampleScene extends Phaser.Scene {
     this.availableBricks = 10;
 
     for (let i=0;i<960;i++) {
-      this.gameState.push([])
+      this.gameState.push([]);
       for (let z=0;z<640;z++){
-        this.gameState[i].push([0,this.cellWidth*z, this.cellHeight*i,'y'])
+        this.gameState[i].push([0,this.cellWidth*z, this.cellHeight*i,'y']);
       }
     }
     console.log(this.gameState);
     for (let i=0;i<960;i++) {
-      this.level.push([])
+      this.level.push([]);
       for (let z=0;z<640;z++){
-        this.level[i].push([0])
+        this.level[i].push([0]);
       }
     }
 
@@ -58,25 +58,25 @@ export default class ExampleScene extends Phaser.Scene {
     const platformDimensions = {
       width: this.textures.get('ground').source[0].width,
       height: this.textures.get('ground').source[0].height
-    }
+    };
     const platforms = this.physics.add.staticGroup();
     this.bg = this.add.image(0, 0, 'sky').setOrigin(0).setDisplaySize(this.sys.game.config.width-96, this.sys.game.config.height-100);
-    const text = this.add.text(250, 250, "Toggle UI", {
-      backgroundColor: "white",
-      color: "blue",
+    const text = this.add.text(250, 250, 'Toggle UI', {
+      backgroundColor: 'white',
+      color: 'blue',
       fontSize: 48
     });
-    const startText = this.add.text(50, 250, "Start", {
-      backgroundColor: "white",
-      color: "blue",
+    const startText = this.add.text(50, 250, 'Start', {
+      backgroundColor: 'white',
+      color: 'blue',
       fontSize: 48
     });
-    const findPathText = this.add.text(50, 450, "Find Path", {
-      backgroundColor: "white",
-      color: "blue",
+    const findPathText = this.add.text(50, 450, 'Find Path', {
+      backgroundColor: 'white',
+      color: 'blue',
       fontSize: 48
     });
-    this.score = 0
+    this.score = 0;
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     this.player = this.physics.add.sprite(100, 450, 'dude');
 
@@ -86,7 +86,7 @@ export default class ExampleScene extends Phaser.Scene {
     let sideBar = platforms.create(this.sys.game.config.width-96, 0, 'sideBar').setOrigin(0, 0).refreshBody();
     let bottomBar = platforms.create(0, this.sys.game.config.height-85, 'bottomBar').setOrigin(0, 0).refreshBody();
 
-    const setupScreenScale = .85
+    const setupScreenScale = .85;
 
 
     let graphics = this.add.graphics();
@@ -115,15 +115,15 @@ export default class ExampleScene extends Phaser.Scene {
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
       gameObject.x = dragX;
       gameObject.y = dragY;
-   });
-   // const zone = [];
-   //  for(let row of this.gameState){
-   //    for(let position of row){
-   //      if(position[0] === 0){
-   //        // bricks.push(platforms.create(position[1]*setupScreenScale, position[2]*setupScreenScale, 'gridObject').setOrigin(0, 0).refreshBody());
-   //      }
-   //    }
-   //  }
+    });
+    // const zone = [];
+    //  for(let row of this.gameState){
+    //    for(let position of row){
+    //      if(position[0] === 0){
+    //        // bricks.push(platforms.create(position[1]*setupScreenScale, position[2]*setupScreenScale, 'gridObject').setOrigin(0, 0).refreshBody());
+    //      }
+    //    }
+    //  }
 
 
     for(let i=0;i<1;i++){
@@ -134,7 +134,7 @@ export default class ExampleScene extends Phaser.Scene {
         this.setTint(0x00ff00);
         console.log(brick.x);
         console.log(brick.y);
-      })
+      });
       brick.on('pointerout', function () {
         this.clearTint();
       });
@@ -144,7 +144,7 @@ export default class ExampleScene extends Phaser.Scene {
 
     this.input.on('dragstart', function (pointer, gameObject) {
       gameObject.setTint(0xff0000);
-      gameObject.setScale(1)
+      gameObject.setScale(1);
       // gameObject.displayHeight = 27;
     });
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
@@ -152,7 +152,7 @@ export default class ExampleScene extends Phaser.Scene {
       gameObject.y = dragY;
       if(gameObject.x > 500){
       } else {
-        gameObject.setScale(1)
+        gameObject.setScale(1);
         // gameObject.displayHeight = 27
       }
       gameObject.refreshBody();
@@ -160,7 +160,7 @@ export default class ExampleScene extends Phaser.Scene {
     this.input.on('dragend', (pointer, gameObject) => {
       gameObject.clearTint();
       if(gameObject.x > this.sys.game.config.width-96-gameObject.displayWidth) {
-        gameObject.setScale(.8)
+        gameObject.setScale(.8);
         gameObject.x = 556;
         gameObject.y = 100;
       }
@@ -175,33 +175,33 @@ export default class ExampleScene extends Phaser.Scene {
     let k = .1;
     this.stars.children.iterate(function (child) {
       child.setBounceY(k);
-      k+=.08
+      k+=.08;
       // child.setGravityY(Phaser.Math.FloatBetween(100, 800))
     });
 
     startText.setInteractive({ useHandCursor: true });
 
-    startText.on("pointerup", () => {
+    startText.on('pointerup', () => {
       this.createLevel();
     });
 
     findPathText.setInteractive({ useHandCursor: true });
 
-    findPathText.on("pointerup", () => {
+    findPathText.on('pointerup', () => {
       this.findPath();
     });
 
     text.setInteractive({ useHandCursor: true });
 
-    text.on("pointerup", () => {
+    text.on('pointerup', () => {
       store.dispatch({ type: TOGGLE_UI });
     });
 
 
     this.player.setBounce(0.1);
-    this.player.setGravityY(600)
+    this.player.setGravityY(600);
     this.player.setCollideWorldBounds(true);
-    this.player.setScale(.85)
+    this.player.setScale(.85);
 
     this.anims.create({
       key: 'left',
@@ -224,7 +224,7 @@ export default class ExampleScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.player, platforms);
-    this.physics.add.collider(this.stars, platforms)
+    this.physics.add.collider(this.stars, platforms);
     this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
     this.physics.add.collider(this.bombs, platforms);
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
@@ -241,7 +241,7 @@ export default class ExampleScene extends Phaser.Scene {
               const brickYPositions = [];
               if((position[2] >= Math.round(brick.y)) && (position[2] <= Math.round(brick.y+brick.height))){
                 if((position[1] >= Math.round(brick.x)) && (position[1] <= Math.round(brick.x+brick.width))) {
-                  position[0] = 1
+                  position[0] = 1;
                   console.log(position[0]);
                 }
               } else {
@@ -274,16 +274,16 @@ export default class ExampleScene extends Phaser.Scene {
     this.easyStar.enableDiagonals();
     this.easyStar.enableCornerCutting();
     this.easyStar.findPath(Math.round(this.player.x), Math.round(this.player.y), 200, 200, function( path ) {
-        if (path === null) {
-	        console.log("The path to the destination point was not found.");
+      if (path === null) {
+	        console.log('The path to the destination point was not found.');
   	    } else {
   	    	for (var i = 0; i < path.length; i++){
-  	    		console.log("P: " + i + ", X: " + path[i].x + ", Y: " + path[i].y);
+  	    		console.log('P: ' + i + ', X: ' + path[i].x + ', Y: ' + path[i].y);
   	    	}
 
   	    }
 	   });
-     this.easyStar.calculate();
+    this.easyStar.calculate();
   }
 
   collectStar (player, star) {
@@ -304,7 +304,7 @@ export default class ExampleScene extends Phaser.Scene {
       // bomb.setCollideWorldBounds(true);
       // bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
-   }
+    }
   }
 
   hitBomb (player, bomb) {

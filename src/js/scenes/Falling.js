@@ -1,10 +1,10 @@
-import store from "../store";
-import { TOGGLE_UI } from "../constants/action-types";
-import { toggleUi } from "../actions/index";
-import Phaser from "phaser";
-import { GAME_HEIGHT, GAME_WIDTH } from "../config";
-import EasyStar from "easystarjs";
-import GrayscalePipeline from "../GrayScalePipeline.js"
+import store from '../store';
+import { TOGGLE_UI } from '../constants/action-types';
+import { toggleUi } from '../actions/index';
+import Phaser from 'phaser';
+import { GAME_HEIGHT, GAME_WIDTH } from '../config';
+import EasyStar from 'easystarjs';
+import GrayscalePipeline from '../GrayScalePipeline.js';
 
 export default class Falling extends Phaser.Scene {
 
@@ -15,13 +15,13 @@ export default class Falling extends Phaser.Scene {
   }
 
   preload(){
-    this.load.image('tiles', 'assets/platformertiles-extruded.png')
-    this.load.audio('backgroundMusic', 'assets/audio/adventure.mp3')
-    this.load.audio('magicTrap2', 'assets/audio/magicTrap2.mp3')
-    this.load.audio('fireballSound', 'assets/audio/sfx_exp_short_hard15.wav')
-    this.load.audio('footsteps', 'assets/audio/sfx_movement_footsteps1b.wav')
-    this.load.audio('jumpSound', 'assets/audio/sfx_movement_jump19_landing.wav')
-    this.load.tilemapTiledJSON('map', 'assets/falling-game-map2.json')
+    this.load.image('tiles', 'assets/platformertiles-extruded.png');
+    this.load.audio('backgroundMusic', 'assets/audio/adventure.mp3');
+    this.load.audio('magicTrap2', 'assets/audio/magicTrap2.mp3');
+    this.load.audio('fireballSound', 'assets/audio/sfx_exp_short_hard15.wav');
+    this.load.audio('footsteps', 'assets/audio/sfx_movement_footsteps1b.wav');
+    this.load.audio('jumpSound', 'assets/audio/sfx_movement_jump19_landing.wav');
+    this.load.tilemapTiledJSON('map', 'assets/falling-game-map2.json');
     this.load.spritesheet('dude',
       'assets/images/otherDude4.png',
       { frameWidth: 32, frameHeight: 48 }
@@ -42,6 +42,8 @@ export default class Falling extends Phaser.Scene {
       'assets/images/exploding-fireball-128.png',
       { frameWidth: 128, frameHeight: 128 }
     );
+    this.grayscalePipeline = this.game.renderer.addPipeline('Grayscale', new GrayscalePipeline(this.game));
+    this.grayscalePipeline.setIntensity(1);
   }
 
   create() {
@@ -63,7 +65,7 @@ export default class Falling extends Phaser.Scene {
       seek: 0,
       loop: false,
       delay: 5
-    }
+    };
     this.footSteps = this.sound.add('footsteps', footStepsSoundConfig);
     this.footStepsTimeOut = true;
 
@@ -85,9 +87,11 @@ export default class Falling extends Phaser.Scene {
       child.flyingLeft = false;
       child.body.immovable = true;
       child.health = 1;
-    })
+    });
 
     this.flame = this.physics.add.sprite(460, 100, 'flame');
+    this.flame.setSize(32, 250, true);
+    this.flame.alpha = 0;
 
     this.portal = this.physics.add.sprite(620, backgroundLayer.height+400, 'flame').setScale(4);
     this.portal.flipY = true;
@@ -115,7 +119,11 @@ export default class Falling extends Phaser.Scene {
       frameRate: 15,
       repeat: 0
     });
-
+    this.anims.create({
+      key: 'stillFlame',
+      frames: [ { key: 'flame', frame: 56 } ],
+      frameRate: 20
+    });
     this.anims.create({
       key: 'portal',
       frames: this.anims.generateFrameNumbers('flame',{start: 21, end: 40}),
@@ -198,8 +206,7 @@ export default class Falling extends Phaser.Scene {
       repeat: -1
     });
 
-    this.grayscalePipeline = this.game.renderer.addPipeline('Grayscale', new GrayscalePipeline(this.game));
-    this.grayscalePipeline.setIntensity(1);
+
 
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
@@ -211,6 +218,7 @@ export default class Falling extends Phaser.Scene {
     this.physics.add.collider(this.fireballs, foregroundLayer, this.fireballExplode, null, this);
     this.physics.add.collider(this.fireballs, this.bats, this.fireballExplode, null, this);
     this.physics.add.overlap(this.player, this.flame, this.beginJourney, null, this);
+
   }
 
   playerEnemyCollide(player, enemy){
@@ -220,12 +228,12 @@ export default class Falling extends Phaser.Scene {
     player.health -= 1;
     enemy.health -=1;
     player.setTint(0xFF1100);
-    this.cameras.main.shake(50,0.05)
+    this.cameras.main.shake(50,0.05);
     setTimeout(()=> {
       player.clearTint();
-    },100)
+    },100);
     if(enemy.health < 1){
-      enemy.setTint(0xFF1100)
+      enemy.setTint(0xFF1100);
       enemy.disableBody(true, true);
     }
   }
@@ -233,11 +241,10 @@ export default class Falling extends Phaser.Scene {
 
 
   beginJourney(player, flame){
-    this.beginJourney = true;
     if(this.player.journeyBegan === false){
       this.player.journeyBegan = true;
-      console.log('begin');
       setTimeout(()=> {
+        this.flame.alpha = 1;
         flame.anims.play('flame', true);
         const tween = this.tweens.add({
           targets: player,
@@ -256,12 +263,11 @@ export default class Falling extends Phaser.Scene {
             setTimeout(()=> {
               this.player.body.moves = true;
               this.backgroundMusic.play();
-            },500); this.cameras.main.setRenderToTexture(this.grayscalePipeline);
+            },500);
+            // this.cameras.main.setRenderToTexture(this.grayscalePipeline);
           },
-          onYoyo: function () { console.log('onYoyo'); console.log(arguments); },
-          onRepeat: function () { console.log('onRepeat'); console.log(arguments); },
         });
-      }, 1000)
+      }, 1000);
     }
   }
 
@@ -278,23 +284,27 @@ export default class Falling extends Phaser.Scene {
         let x = 10/i;
         i++;
         this.grayscalePipeline.setIntensity(x);
-      },50)
-      let fireballSound = this.sound.add('fireballSound')
+      },50);
+      let fireballSound = this.sound.add('fireballSound');
       fireballSound.play();
       // fireballSound.stop();
       this.player.abilityCoolDown = false;
-      this.fireballs.create(this.player.x, this.player.y-20, 'fireball')
+      this.fireballs.create(this.player.x, this.player.y-20, 'fireball');
       this.fireballs.children.iterate((child) => {
         child.setSize(32, 32, true);
         child.setVelocityY(400);
         child.anims.play('fireball', true);
-      })
-      this.player.setVelocityY(-100)
+      });
+      this.player.setVelocityY(-100);
     } else {
       setTimeout(()=>{
         this.player.abilityCoolDown = true;
-      },10)
+      },10);
     }
+  }
+
+  setPipeline(){
+    this.cameras.main.setRenderToTexture(this.grayscalePipeline);
   }
 
   fireballExplode(fireball, enemy){
@@ -308,10 +318,9 @@ export default class Falling extends Phaser.Scene {
       this.player.doubleJump = true;
       this.score += 10;
       this.events.emit('addScore');
-      enemy.setTint(0xFF1100)
+      enemy.setTint(0xFF1100);
       enemy.disableBody(true, true);
     }
-    console.log(enemy);
   }
 
 
@@ -337,24 +346,6 @@ export default class Falling extends Phaser.Scene {
     },1);
   }
 
-    if(!player.body.onFloor()){
-      let fade = true;
-       loop = setInterval(()=>{
-         let x = 10/i
-         if(i === 50){
-           fade = false
-         }
-         if( i < 10){
-           fade = true
-         }
-        if(fade){
-          i++
-        }else {
-          i--
-        }
-        player.setAlpha(x);
-      },50)
-    }
   startGame(){
     this.events.emit('newGame');
     this.player.facingDirection = 'right';
@@ -367,13 +358,14 @@ export default class Falling extends Phaser.Scene {
   }
 
   update(time, delta){
+    // this.flame.anims.play('stillFlame', true);
     this.portal.anims.play('portal', true);
     this.bats.children.iterate((child) => {
       child.anims.play('bat', true);
       if(child.flyingLeft === true){
-        child.setVelocityX(-160)
+        child.setVelocityX(-160);
       } if(child.flyingRight === true){
-        child.setVelocityX(160)
+        child.setVelocityX(160);
       }
       if(child.body.blocked.right === true){
         child.flyingRight = false;
@@ -383,7 +375,7 @@ export default class Falling extends Phaser.Scene {
         child.flyingLeft = false;
         child.flyingRight = true;
       }
-    })
+    });
     if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
       this.shootFireball();
     }
@@ -392,8 +384,8 @@ export default class Falling extends Phaser.Scene {
         this.footStepsTimeOut = false;
         this.footSteps.play();
         setTimeout(()=>{
-          this.footStepsTimeOut=true
-        },250)
+          this.footStepsTimeOut=true;
+        },250);
       }
       this.player.facingDirection = 'left';
       this.player.setVelocityX(-160);
@@ -403,8 +395,8 @@ export default class Falling extends Phaser.Scene {
         this.footStepsTimeOut = false;
         this.footSteps.play();
         setTimeout(()=>{
-          this.footStepsTimeOut=true
-        },250)
+          this.footStepsTimeOut=true;
+        },250);
       }
       this.player.facingDirection = 'right';
       this.player.setVelocityX(160);
@@ -420,17 +412,16 @@ export default class Falling extends Phaser.Scene {
     }
     if (Phaser.Input.Keyboard.JustDown(this.cursors.up)) {
       if(this.player.body.blocked.down){
-        this.jumpSound.play()
+        this.jumpSound.play();
         this.player.setVelocityY(-300);
       } else if(this.player.doubleJump){
-        this.jumpSound.play()
+        this.jumpSound.play();
         this.player.doubleJump = false;
         this.player.setVelocityY(-150);
       }
     }
     if ((this.player.body.onFloor() || !this.player.body.touching.none) && !this.player.doubleJump) {
       this.player.doubleJump = true;
-      console.log('doublejump restored');
     }
 
     if (this.player.body.velocity.y > 0 && !this.player.body.onFloor()){

@@ -1,11 +1,10 @@
 import React from 'react';
 import Body from './Body/Body';
 import Header from './Header/Header';
-import { Sprite, Stage } from "react-pixi-fiber";
-import RotatingBunny from "../../sketches/RotatingBunny";
 import UI from '../UI/UI';
 import Game from '../Game/Game';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 const height = 450;
@@ -24,9 +23,9 @@ const styles = {
     margin: '0 auto',
   },
   canvas: {
-      position: 'absolute',
-       zIndex: 1
-     },
+    position: 'absolute',
+    zIndex: 1
+  },
   gamestartscreen: {
     position: 'relative',
     zIndex: 2,
@@ -34,23 +33,23 @@ const styles = {
   game: {
     backgroundColor: 'black'
   }
-}
+};
 class Menu extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
     console.log(this.props, 'here');
   }
   render() {
     console.log(this.props.playGame);
-    let ui = this.props.playGame ? <UI /> : null
-    let game = this.props.playGame ? <Game style={styles.game} /> : null
-    let header = !this.props.playGame ? <Header /> : null
-    let body = !this.props.playGame ? <Body /> : null
+    let ui = this.props.playGame ? <UI /> : null;
+    let game = this.props.playGame ? <Game style = {styles.game} /> : null;
+    let header = !this.props.playGame ? <Header /> : null;
+    let body = !this.props.playGame ? <Body /> : null;
     return (
-      <div style={styles.game}>
+      <div style = {styles.game}>
         {ui}
         {game}
-        <div style={styles.gamestartscreen}>
+        <div style = {styles.gamestartscreen}>
           {header}
           {body}
         </div>

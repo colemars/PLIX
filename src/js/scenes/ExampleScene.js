@@ -1,8 +1,8 @@
-import store from "../store";
-import { TOGGLE_UI } from "../constants/action-types";
-import { toggleUi } from "../actions/index";
-import Phaser from "phaser";
-import { GAME_HEIGHT, GAME_WIDTH } from "../config";
+import store from '../store';
+import { TOGGLE_UI } from '../constants/action-types';
+import { toggleUi } from '../actions/index';
+import Phaser from 'phaser';
+import { GAME_HEIGHT, GAME_WIDTH } from '../config';
 
 export default class ExampleScene extends Phaser.Scene {
 
@@ -20,9 +20,9 @@ export default class ExampleScene extends Phaser.Scene {
     const brickHeight = 32;
 
     for (let i=0;i<32;i++) {
-      gameState.push([])
+      gameState.push([]);
       for (let z=0;z<5;z++){
-        gameState[i].push([brickWidth*z, brickHeight*z])
+        gameState[i].push([brickWidth*z, brickHeight*z]);
       }
     }
     console.log(gameState);
@@ -33,33 +33,33 @@ export default class ExampleScene extends Phaser.Scene {
     const platformDimensions = {
       width: this.textures.get('ground').source[0].width,
       height: this.textures.get('ground').source[0].height
-    }
+    };
     const platforms = this.physics.add.staticGroup();
     this.bg = this.add.image(0, 0, 'sky').setOrigin(0).setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
-    const text = this.add.text(250, 250, "Toggle UI", {
-      backgroundColor: "white",
-      color: "blue",
+    const text = this.add.text(250, 250, 'Toggle UI', {
+      backgroundColor: 'white',
+      color: 'blue',
       fontSize: 48
     });
-    this.score = 0
+    this.score = 0;
     this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     this.player = this.physics.add.sprite(100, 450, 'dude');
 
     this.bombs = this.physics.add.group();
 
-    let ground = platforms.create(this.sys.game.config.width/2, this.sys.game.config.height-platformDimensions.height/2, 'ground')
+    let ground = platforms.create(this.sys.game.config.width/2, this.sys.game.config.height-platformDimensions.height/2, 'ground');
     ground.scaleX = 10;
     console.log(this.sys.game.config.height);
     // ground.y = window.innerHeight
     console.log(ground.y);
-    ground.refreshBody()
+    ground.refreshBody();
 
     let bricks = [];
-    bricks.push(platforms.create(0, 220, 'ground').setOrigin(0, 0).refreshBody())
-    bricks.push(platforms.create(128, 220, 'ground').setOrigin(0, 0).refreshBody())
-    bricks.push(platforms.create(256, 220, 'ground').setOrigin(0, 0).refreshBody())
-    bricks.push(platforms.create(384, 220, 'ground').setOrigin(0, 0).refreshBody())
-    bricks.push(platforms.create(512, 220, 'ground').setOrigin(0, 0).refreshBody())
+    bricks.push(platforms.create(0, 220, 'ground').setOrigin(0, 0).refreshBody());
+    bricks.push(platforms.create(128, 220, 'ground').setOrigin(0, 0).refreshBody());
+    bricks.push(platforms.create(256, 220, 'ground').setOrigin(0, 0).refreshBody());
+    bricks.push(platforms.create(384, 220, 'ground').setOrigin(0, 0).refreshBody());
+    bricks.push(platforms.create(512, 220, 'ground').setOrigin(0, 0).refreshBody());
 
     console.log(this.sys.game.config.width);
 
@@ -85,7 +85,7 @@ export default class ExampleScene extends Phaser.Scene {
 
     text.setInteractive({ useHandCursor: true });
 
-    text.on("pointerup", () => {
+    text.on('pointerup', () => {
       store.dispatch({ type: TOGGLE_UI });
     });
 
@@ -114,7 +114,7 @@ export default class ExampleScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.player, platforms);
-    this.physics.add.collider(this.stars, platforms)
+    this.physics.add.collider(this.stars, platforms);
     this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
     this.physics.add.collider(this.bombs, platforms);
     this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
@@ -129,17 +129,17 @@ export default class ExampleScene extends Phaser.Scene {
 
     if (this.stars.countActive(true) === 0) {
       this.stars.children.iterate(function (child) {
-      child.enableBody(true, child.x, 0, true, true);
-    });
+        child.enableBody(true, child.x, 0, true, true);
+      });
 
-    const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+      const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-    const bomb = this.bombs.create(x, 16, 'bomb');
-    bomb.setBounce(1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+      const bomb = this.bombs.create(x, 16, 'bomb');
+      bomb.setBounce(1);
+      bomb.setCollideWorldBounds(true);
+      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
-   }
+    }
   }
 
   hitBomb (player, bomb) {

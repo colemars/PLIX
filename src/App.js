@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Home from './js/components/Home/Home'
+import Home from './js/components/Home/Home';
 import Helmet from 'react-helmet';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -9,10 +9,10 @@ class App extends Component {
     return (
       <div>
         <Helmet>
-          <style>{`body { margin: 0; width:100%; height:100%;}`}</style>
-          <style>{`html { height:100%; background-color: #000}`}</style>
+          <style>{'body { margin: 0; width:100%; height:100%;}'}</style>
+          <style>{'html { height:100%; background-color: #000}'}</style>
         </Helmet>
-          <Home />
+        <Home />
       </div>
     );
   }

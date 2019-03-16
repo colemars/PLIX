@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Title from './Title';
 import StartMenu from './StartMenu';
 import SelectedMenu from './SelectedMenu';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return { buttonProps: state.buttonProps };
@@ -32,29 +32,29 @@ const styles = {
 
 class Body extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
     this.props = props;
     this.state = {
       selection: null
-    }
-    this.handleMenuButtonClick = this.handleMenuButtonClick.bind(this)
+    };
+    this.handleMenuButtonClick = this.handleMenuButtonClick.bind(this);
   }
 
   handleMenuButtonClick(selection){
-    this.setState({selection: selection})
+    this.setState({selection: selection});
   }
 
   render(){
-    let selectedMenu = this.props.buttonProps.selected ? <SelectedMenu selection={this.state.selection} /> : null
+    let selectedMenu = this.props.buttonProps.selected ? <SelectedMenu selection = {this.state.selection} /> : null;
     return (
       <div>
         <Title />
-        <Grid item xs={12}>
-          <Grid container justify='center' spacing = {0}>
-            <Grid style={styles.menu} key={0} item>
-              <StartMenu onMenuButtonClick={this.handleMenuButtonClick} />
+        <Grid item xs = {12}>
+          <Grid container justify = 'center' spacing = {0}>
+            <Grid style = {styles.menu} key = {0} item>
+              <StartMenu onMenuButtonClick = {this.handleMenuButtonClick} />
             </Grid>
-            <Grid style={styles.menu} key={1} item>
+            <Grid style = {styles.menu} key = {1} item>
               {selectedMenu}
             </Grid>
           </Grid>
