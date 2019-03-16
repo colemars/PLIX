@@ -133,7 +133,10 @@ class MenuButton extends React.Component{
 MenuButton.propTypes = {
   selection: PropTypes.string.isRequired,
   onMenuButtonClick: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  playGame: PropTypes.bool.isRequired,
+  selectMenu: PropTypes.string.isRequired,
+  buttonprops: PropTypes.object.isRequired
 };
 
 const Button = connect(mapStateToProps, mapDispatchToProps)(MenuButton);
