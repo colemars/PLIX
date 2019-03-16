@@ -17,4 +17,8 @@ const HowToPlay = ({ articles }) => (
 
 const Content = connect(mapStateToProps)(HowToPlay);
 
+HowToPlay.propTypes = {
+  articles: PropTypes.string.isRequired,
+};
+
 export default Content;
