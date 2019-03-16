@@ -98,10 +98,8 @@ export default class Falling extends Phaser.Scene {
     this.player.setCollideWorldBounds(true); // don't go out of the map
     this.player.setGravityY(100);
     this.player.setMaxVelocity(1000, 800);
-    this.player.facingDirection = 'right';
-    this.player.health = 5;
-    this.player.abilityCoolDown = true;
-    this.player.doubleJump = true;
+
+    this.startGame();
 
     this.jumpSound = this.sound.add('jumpSound');
 
@@ -357,6 +355,15 @@ export default class Falling extends Phaser.Scene {
         player.setAlpha(x);
       },50)
     }
+  startGame(){
+    this.events.emit('newGame');
+    this.player.facingDirection = 'right';
+    this.player.health = 5;
+    this.player.abilityCoolDown = true;
+    this.player.doubleJump = true;
+    this.player.journeyBegan = false;
+    this.score = 0;
+    this.gameOver = false;
   }
 
   update(time, delta){
