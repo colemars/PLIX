@@ -8,7 +8,7 @@
 WIP HTML5/JS Game
 
 #### Or see it yourself:
-[coming soon]
+https://plix-8befd.firebaseapp.com/
 
 #### Usage:
 
