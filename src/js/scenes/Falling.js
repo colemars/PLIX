@@ -270,7 +270,6 @@ export default class Falling extends Phaser.Scene {
   shootFireball(){
     let loop;
     let i=11;
-    let z = 1;
     if(this.player.abilityCoolDown){
       let fade = true;
       setTimeout(()=>{
@@ -320,10 +319,25 @@ export default class Falling extends Phaser.Scene {
 
 
   updatePlayerAlpha(player, bool){
-    let i=11;
-    let z = 1;
-    let loop,
-        newLoop;
+    let i=1001;
+    let loop;
+    let fade = true;
+    loop = setInterval(()=>{
+      let x = 1000/i;
+      if(i > 4000){
+        fade = false;
+      }
+      if( i < 1000){
+        fade = true;
+      }
+      if(fade){
+        i+=10;
+      }else {
+        i-=10;
+      }
+      player.setAlpha(x);
+    },1);
+  }
 
     if(!player.body.onFloor()){
       let fade = true;
