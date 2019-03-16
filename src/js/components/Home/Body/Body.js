@@ -65,7 +65,7 @@ class Body extends React.Component {
 }
 
 Body.propTypes = {
-
+  buttonprops: PropTypes.object.isRequired
 };
 
 const Page = connect(mapStateToProps)(Body);
