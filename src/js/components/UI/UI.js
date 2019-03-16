@@ -126,4 +126,9 @@ const mapStateToProps = state => {
   return { showUi: state.showUi};
 };
 
+UI.propTypes = {
+  showUI: PropTypes.bool.isRequired
+};
+
+
 export default connect(mapStateToProps)(UI);
