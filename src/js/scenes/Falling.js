@@ -206,24 +206,13 @@ export default class Falling extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
 
-    // const cursors = this.input.keyboard.createCursorKeys();
-    // const controlConfig = {
-    //    camera: this.cameras.main,
-    //    a: cursors.left,
-    //    d: cursors.right,
-    //    w: cursors.up,
-    //    s: cursors.down,
-    //    speed: 0.5
-    // };
-   // this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
-   this.physics.add.collider(foregroundLayer, this.player);
-   this.physics.add.collider(this.bats, this.player, this.playerEnemyCollide, null, this);
-   this.physics.add.collider(foregroundLayer, this.bats);
-   this.physics.add.collider(foregroundLayer, this.flame);
-   this.physics.add.collider(this.fireballs, foregroundLayer, this.fireballExplode, null, this);
-   this.physics.add.collider(this.fireballs, this.bats, this.fireballExplode, null, this);
-   this.player.journeyBegan = false;
-   this.physics.add.overlap(this.player, this.flame, this.beginJourney, null, this);
+    this.physics.add.collider(foregroundLayer, this.player);
+    this.physics.add.collider(this.bats, this.player, this.playerEnemyCollide, null, this);
+    this.physics.add.collider(foregroundLayer, this.bats);
+    this.physics.add.collider(foregroundLayer, this.flame);
+    this.physics.add.collider(this.fireballs, foregroundLayer, this.fireballExplode, null, this);
+    this.physics.add.collider(this.fireballs, this.bats, this.fireballExplode, null, this);
+    this.physics.add.overlap(this.player, this.flame, this.beginJourney, null, this);
   }
 
   playerEnemyCollide(player, enemy){
