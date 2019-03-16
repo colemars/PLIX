@@ -63,7 +63,11 @@ const mapStateToProps = state => {
   return {
     buttonProps: state.buttonProps,
     playGame: state.playGame
-  }
+  };
+};
+
+Menu.propTypes = {
+  playGame: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps)(Menu);
